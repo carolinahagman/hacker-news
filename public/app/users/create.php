@@ -10,12 +10,26 @@ if (isset($_POST["submit"])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
     $dateCreated = date('ymd');
-
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
     $avatar = "profile.svg";
     $biography = "";
 
-    $statement = $database->prepare('INSERT INTO users (email, password, biography, avatar, alias, create_date) VALUES (:email, :password, :biography, :avatar, :alias, :create_date);');
+    //create function instead
+    $emailAndAliasCheck = $pdo->prepare('SELECT * FROM users WHERE email = :email OR alias = :alias');
+    $emailAndAliasCheck->bindParam(':email', $email, PDO::PARAM_STR);
+    $emailAndAliasCheck->bindParam(':alias', $alias, PDO::PARAM_STR);
+    $emailAndAliasCheck->execute();
+
+    $duplicateAliasOrUsername = $emailAndAliasCheck->fetch(PDO::FETCH_ASSOC);
+
+    //check if $password and $confirmPassword match
+    if ($password !== $confirmPassword) {
+        echo "password do not match";
+    } else if ($duplicateAliasOrUsername) {
+        echo "alias or email already in use";
+    } else
+
+        $statement = $database->prepare('INSERT INTO users (email, password, biography, avatar, alias, create_date) VALUES (:email, :password, :biography, :avatar, :alias, :create_date);');
 
     if (!$statement) {
         die(var_dump($database->errorInfo()));
@@ -28,5 +42,5 @@ if (isset($_POST["submit"])) {
     $statement->bindParam(':create_date', $dateCreated, PDO::PARAM_STR);
     $statement->execute();
 
-    redirect('/index.php');
+    redirect('/login.php');
 }

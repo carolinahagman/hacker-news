@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
-<article>
+<article class="flex items-center flex-col">
     <h1>Create account</h1>
 
     <form action="/app/users/create.php" method="post">
@@ -24,7 +24,7 @@
         </div>
 
 
-        <button type="submit" name="submit" class="">Create</button>
+        <button type="submit" name="submit" class="text-center w-28">Create</button>
     </form>
 </article>
 
