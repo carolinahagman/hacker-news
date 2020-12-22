@@ -16,20 +16,6 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 You need [PHP](https://www.php.net/) to view this project.
 
-You also need to make sure you have Sqlite installed.
-
-On macOS (with Brew)
-
-```
-$ brew install sqlite
-```
-
-On Windows (Ubuntu)
-
-```
-sudo apt-get install php-sqlite3
-```
-
 Clone the repository to your computer
 
 ```
