@@ -14,33 +14,16 @@ if (isset($_POST["submit"])) {
     $avatar = "profile.svg";
     $biography = "";
 
-    //create function instead
-    $emailAndAliasCheck = $pdo->prepare('SELECT * FROM users WHERE email = :email OR alias = :alias');
-    $emailAndAliasCheck->bindParam(':email', $email, PDO::PARAM_STR);
-    $emailAndAliasCheck->bindParam(':alias', $alias, PDO::PARAM_STR);
-    $emailAndAliasCheck->execute();
-
-    $duplicateAliasOrUsername = $emailAndAliasCheck->fetch(PDO::FETCH_ASSOC);
 
     //check if $password and $confirmPassword match
     if ($password !== $confirmPassword) {
         echo "password do not match";
-    } else if ($duplicateAliasOrUsername) {
+    } else if (userExists($database, $email, $alias)) {
         echo "alias or email already in use";
-    } else
-
-        $statement = $database->prepare('INSERT INTO users (email, password, biography, avatar, alias, create_date) VALUES (:email, :password, :biography, :avatar, :alias, :create_date);');
-
-    if (!$statement) {
-        die(var_dump($database->errorInfo()));
+    } else {
+        createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated);
     }
-    $statement->bindParam(':alias', $alias, PDO::PARAM_STR);
-    $statement->bindParam(':email', $email, PDO::PARAM_STR);
-    $statement->bindParam(':password', $hashedPwd, PDO::PARAM_STR);
-    $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-    $statement->bindParam(':avatar', $avatar, PDO::PARAM_STR);
-    $statement->bindParam(':create_date', $dateCreated, PDO::PARAM_STR);
-    $statement->execute();
-
+    unset($password);
+    unset($confirmPassword);
     redirect('/login.php');
 }
