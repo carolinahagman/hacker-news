@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="flex w-screen">
     <a class="navbar-brand" href="#"><?php echo $config['title']; ?></a>
 
-    <ul class="navbar-nav">
+    <ul class="flex justify-between">
         <li class="nav-item">
             <a class="nav-link <?php echo $_SERVER['SCRIPT_NAME'] === '/index.php' ? 'active' : ''; ?>" href="/index.php">Home</a>
         </li><!-- /nav-item -->
 
         <li class="nav-item">
-            <a class="nav-link <?php echo $_SERVER['SCRIPT_NAME'] === '/profile.php' ? 'active' : ''; ?>" href="/about.php">Profile</a>
+            <a class="nav-link <?php echo $_SERVER['SCRIPT_NAME'] === '/profile.php' ? 'active' : ''; ?>" href="/profile.php">Profile</a>
         </li><!-- /nav-item -->
 
         <li class="nav-item">
