@@ -17,13 +17,21 @@ if (isset($_POST["submit"])) {
 
     //check if $password and $confirmPassword match
     if ($password !== $confirmPassword) {
-        echo "password do not match";
+        $_SESSION['message'] = "password do not match";
     } else if (userExists($database, $email, $alias)) {
-        echo "alias or email already in use";
+        $_SESSION['message'] = "alias or email already in use";
     } else {
         createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated);
     }
     unset($password);
     unset($confirmPassword);
-    redirect('/login.php');
+    // Log in the user after signing up
+    $statement = $database->prepare('SELECT * FROM users WHERE alias = :alias');
+    $statement->bindParam(':alias', $alias, PDO::PARAM_STR);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['user'] = $user;
+    $_SESSION['message'] = "You're logged in!";
+
+    redirect('/index.php');
 }
