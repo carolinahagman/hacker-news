@@ -19,8 +19,8 @@ if (isset($_POST['email'], $_POST['password'])) {
     // If we couldn't find the user in the database, redirect back to the login
     // page with our custom redirect function.
     if (!$user) {
-        redirect('/login.php');
         $_SESSION['error'] = "wrong email or password";
+        redirect('/login.php');
     }
 
 

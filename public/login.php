@@ -2,6 +2,10 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
 <article class="flex items-center flex-col mt-10 w-screen">
+    <?php if (isset($_SESSION['error'])) {
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+    } ?>
     <h1 class="mb-5 uppercase text-xl text-gray-900 dark:text-gray-200">Login</h1>
 
     <form class="flex flex-col items-center" action="app/users/login.php" method="post">
