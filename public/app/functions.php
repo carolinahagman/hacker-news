@@ -36,3 +36,8 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
     $statement->bindParam(':create_date', $dateCreated, PDO::PARAM_STR);
     $statement->execute();
 }
+
+function loggedIn(): bool
+{
+    return isset($_SESSION['user']);
+}

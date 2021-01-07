@@ -1,12 +1,14 @@
-<nav class="w-screen">
+<nav class="w-screen m-3">
 
-    <ul class="w-full flex justify-around dark:text-gray-100">
+    <ul class="w-full flex justify-around dark:text-gray-100 ">
         <li class="">
             <a class=" <?= $_SERVER['SCRIPT_NAME'] === '/index.php' ? 'active' : ''; ?>" href="/index.php"><?= $config['title']; ?></a>
         </li><!-- /nav-item -->
 
         <li class="">
-            <a class=" <?= $_SERVER['SCRIPT_NAME'] === '/profile.php' ? 'active' : ''; ?>" href="/profile.php">Profile</a>
+            <?php if (isset($_SESSION['user'])) : ?>
+                <a class="" href="/app/users/profile.php">Profile</a>
+            <?php endif; ?>
         </li><!-- /nav-item -->
 
         <li class="">

@@ -1,3 +1,6 @@
+<?php require __DIR__ . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/views/header.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +11,7 @@
 </head>
 
 <body>
-    <?php if (isset($user)) : ?>
+    <?php if (loggedIn()) : ?>
         <section>
             <div>
                 <img src="/public/app/users/uploads/<?= $user['avatar'] ?>" alt="avatar">
@@ -19,15 +22,12 @@
                 </ul>
             </div>
             <p><?= $user['biography']; ?></p>
-
             <ul>
                 <li>POSTS</li>
                 <li>COMMENTS</li>
                 <li>UPVOTES</li>
             </ul>
-
         </section>
-
         <section>
             <img src="" alt="avatar">
             <form class="flex flex-col items-center" action="/app/users/editProfile.php" method="post">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="">
                     <label for="biography" class="">biography</label>
-                    <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="text" name="biography" id="biography">
+                    <textarea class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="text" name="biography" id="biography">
                 </div>
                 <div class="">
                     <label for="change-email" class="">email</label>
@@ -50,8 +50,8 @@
                 <button type="submit" name="submit" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900 dark:text-gray-200 dark:bg-gray-800">Update</button>
             </form>
         </section>
-    <?php endif; ?>
-
+        <?php else :
+        redirect('/');
+    endif; ?>
 </body>
-
 </html>
