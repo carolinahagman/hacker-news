@@ -12,15 +12,16 @@ if (isset($_POST["submit"])) {
     $dateCreated = date("ymd");
     $updateDate = date("ymd");
     $postImage = $_FILES['post-image'];
-    $imageName = " ";
+    $imageName = "";
     $fileFormat = $_FILES['post-image']['type'];
     $fileSize = $_FILES['post-image']['size'];
     $fileEnding = explode(".", $postImage['name'])[1];
+    $imageTitle = implode("", explode(' ', $postTitle));
 
     if (($fileFormat === 'image/svg' || $fileFormat === 'image/jpg' || $fileFormat === 'image/jpeg' || $fileFormat === 'image/png') && $fileSize <= 2000000) {
-        $imageName = date('ymd') . $postTitle . '.' . $fileEnding;
+        $imageName = date('ymdhis') . $imageTitle . '.' . $fileEnding;
         $destination = __DIR__ . '/uploads/' . $imageName;
-        move_uploaded_file($post['tmp_name'], $destination);
+        move_uploaded_file($postImage['tmp_name'], $destination);
     }
 
     $statement = $database->prepare('INSERT INTO posts (user_id, content, create_date, title, link, image, update_date) VALUES (:userId, :postContent, :dateCreated, :postTitle, :postLink, :imageName, :updateDate);');
@@ -36,6 +37,6 @@ if (isset($_POST["submit"])) {
     $statement->BindParam(':imageName', $imageName);
     $statement->BindParam(':updateDate', $updateDate);
     $statement->execute();
+    $id = $database->lastInsertId();
+    redirect("/post.php?id=${id}");
 }
-
-redirect('/');

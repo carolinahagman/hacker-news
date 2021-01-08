@@ -1,17 +1,24 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/header.php';
+$user = $_SESSION['user'];
+$id = $_GET['id'];
+$post = getPostById($database, $id); ?>
+
 
 <main>
     <article>
-        <a href="">
-            <h1>This is the title</h1>
+        <a href=<?= $post['link']; ?>>
+            <h1><?= $post['title']; ?></h1>
         </a>
-        <img class="w-24" src="/app/posts/uploads/8-01-21.JPEG" alt="">
-        <p>This is where the content will be</p>
+        <img class="w-24" src="/app/posts/uploads/<?= $post['image'] ?>" alt="">
+        <p><?= $post['content']; ?></p>
     </article>
     <div>
-        <p>date</p>
-        <p>likes</p>
+        <p><?= $post['create_date']; ?></p>
+        <p>upvotes</p>
+        <?php if ($user['id'] === $post['user_id']) : ?>
+            <a href="/editPost.php?id=<?= $id ?>">Edit</a>
+        <?php endif; ?>
     </div>
     <section>
         <div class="">

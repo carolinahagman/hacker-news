@@ -90,3 +90,20 @@ function updatePwd($database, $password, $userId): void
     $statement->bindParam(':userId', $userId);
     $statement->execute();
 }
+
+function getAllPosts($database): array
+{
+    $statement = $database->query('SELECT * FROM posts');
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
+}
+
+function getPostById($database, $postId): array
+{
+    $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
+    return $post;
+}
