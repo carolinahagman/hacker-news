@@ -11,8 +11,18 @@ if (isset($_POST["submit"])) {
     $userId = $_SESSION['user']['id'];
     $dateCreated = date("ymd");
     $updateDate = date("ymd");
+    $postImage = $_FILES['post-image'];
+    $imageName = " ";
+    $fileFormat = $_FILES['post-image']['type'];
+    $fileSize = $_FILES['post-image']['size'];
+    $fileEnding = explode(".", $postImage['name'])[1];
 
-    $statement = $database->prepare('INSERT INTO posts (user_id, content, create_date, title, link, update_date) VALUES (:userId, :postContent, :dateCreated, :postTitle, :postLink, :updateDate);');
+    if (($fileFormat === 'image/svg' || $fileFormat === 'image/jpg' || $fileFormat === 'image/jpeg' || $fileFormat === 'image/png') && $fileSize <= 2000000) {
+        $imageName = date('j-m-y') . '.' . $fileEnding;
+        $destination = __DIR__ . '/uploads/' . $imageName;
+    }
+
+    $statement = $database->prepare('INSERT INTO posts (user_id, content, create_date, title, link, image, update_date) VALUES (:userId, :postContent, :dateCreated, :postTitle, :postLink, :imageName, :updateDate);');
 
     if (!$statement) {
         die(var_dump($database->errorInfo()));
@@ -22,6 +32,7 @@ if (isset($_POST["submit"])) {
     $statement->BindParam(':dateCreated', $dateCreated);
     $statement->BindParam(':postTitle', $postTitle);
     $statement->BindParam(':postLink', $postLink);
+    $statement->BindParam(':imageName', $imageName);
     $statement->BindParam(':updateDate', $updateDate);
     $statement->execute();
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-if (isset($_POST["submit"])) {
+if (isset($_POST['alias'], $_POST['email'], $_POST['password'], $_POST['confirm-password'])) {
     $alias = filter_var($_POST['alias'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];

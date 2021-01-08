@@ -1,4 +1,4 @@
-<nav class="w-screen m-3">
+<nav class="w-screen p-3">
 
     <ul class="w-full flex justify-around dark:text-gray-100 ">
         <li class="">

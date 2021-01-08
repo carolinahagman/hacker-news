@@ -8,5 +8,5 @@
     <title><?php echo $config['title']; ?></title>
 </head>
 
-<body class="bg-white dark:bg-gray-900">
+<body class="bg-white dark:bg-gray-900 w-screen">
     <?php require __DIR__ . '/navigation.php'; ?>
