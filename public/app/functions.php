@@ -29,9 +29,6 @@ function emailExists($database, $email): bool
     return !!$emailExists;
 }
 
-
-
-
 //create user
 function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated): void
 {

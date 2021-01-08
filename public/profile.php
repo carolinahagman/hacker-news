@@ -18,14 +18,14 @@
                 <ul>
                     <li><?= $_SESSION['user']['alias']; ?></li>
                     <li>created at <?= $_SESSION['user']['create_date']; ?></li>
-                    <li>edit profile</li>
+                    <li><button>edit profile</button></li>
                 </ul>
             </div>
             <p><?= $_SESSION['user']['biography']; ?></p>
             <ul>
-                <li>POSTS</li>
-                <li>COMMENTS</li>
-                <li>UPVOTES</li>
+                <li><button>POSTS</button></li>
+                <li><button>COMMENTS</button></li>
+                <li><button>UPVOTES</button></li>
             </ul>
         </section>
         <section>
@@ -36,7 +36,7 @@
                     <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="file" accept=".jpg, .jpeg, .png, .svg" name=" change-avatar" id="change-avatar">
                 </div>
                 <div class="">
-                    <label for="change-alias" class="">aliasl</label>
+                    <label for="change-alias" class="">alias</label>
                     <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="text" name="change-alias" id="change-alias">
                 </div>
                 <div class="">
