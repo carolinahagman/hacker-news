@@ -29,11 +29,15 @@
             </ul>
         </section>
         <section>
-            <img src="" alt="avatar">
+            <img src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
             <form class="flex flex-col items-center" action="/app/users/editProfile.php" method="post" enctype="multipart/form-data">
                 <div class="">
                     <label for="change-avatar" class="">change avatar</label>
                     <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="file" accept=".jpg, .jpeg, .png, .svg" name=" change-avatar" id="change-avatar">
+                </div>
+                <div class="">
+                    <label for="change-alias" class="">aliasl</label>
+                    <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="text" name="change-alias" id="change-alias">
                 </div>
                 <div class="">
                     <label for="biography" class="">biography</label>

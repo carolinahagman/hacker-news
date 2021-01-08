@@ -9,16 +9,28 @@ function redirect(string $path)
 }
 
 //check if alias or email exists
-function userExists($database, $email, $alias): array
+function aliasExists($database, $alias): bool
 {
-    $emailAndAliasCheck = $database->prepare('SELECT * FROM users WHERE email = :email OR alias = :alias');
-    $emailAndAliasCheck->bindParam(':email', $email, PDO::PARAM_STR);
-    $emailAndAliasCheck->bindParam(':alias', $alias, PDO::PARAM_STR);
-    $emailAndAliasCheck->execute();
+    $aliasCheck = $database->prepare('SELECT * FROM users WHERE alias = :alias');
+    $aliasCheck->bindParam(':alias', $alias, PDO::PARAM_STR);
+    $aliasCheck->execute();
 
-    $userExists = $emailAndAliasCheck->fetch(PDO::FETCH_ASSOC);
-    return $userExists;
+    $aliasExists = $aliasCheck->fetch(PDO::FETCH_ASSOC);
+    return !!$aliasExists;
 }
+
+function emailExists($database, $email): bool
+{
+    $emailCheck = $database->prepare('SELECT * FROM users WHERE email = :email');
+    $emailCheck->bindParam(':email', $email, PDO::PARAM_STR);
+    $emailCheck->execute();
+
+    $emailExists = $emailCheck->fetch(PDO::FETCH_ASSOC);
+    return !!$emailExists;
+}
+
+
+
 
 //create user
 function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated): void
@@ -70,6 +82,14 @@ function updateEmail($database, $email, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET email = :email WHERE id = :userId;');
     $statement->bindParam(':email', $email);
+    $statement->bindParam(':userId', $userId);
+    $statement->execute();
+}
+
+function updatePwd($database, $password, $userId): void
+{
+    $statement = $database->prepare('UPDATE users SET password = :password WHERE id = :userId;');
+    $statement->bindParam(':password', $password);
     $statement->bindParam(':userId', $userId);
     $statement->execute();
 }

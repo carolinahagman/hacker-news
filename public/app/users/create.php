@@ -19,8 +19,11 @@ if (isset($_POST["submit"])) {
     if ($password !== $confirmPassword) {
         $_SESSION['message'] = "password do not match";
         redirect('/create.php');
-    } else if (userExists($database, $email, $alias)) {
-        $_SESSION['message'] = "alias or email already in use";
+    } else if (aliasExists($database, $alias)) {
+        $_SESSION['message'] = "alias already in use";
+        redirect('/create.php');
+    } else if (emailExists($database, $email)) {
+        $_SESSION['message'] = "email already in use";
         redirect('/create.php');
     } else {
         createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated);
