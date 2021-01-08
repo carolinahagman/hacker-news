@@ -2,12 +2,12 @@
 
     <ul class="w-full flex justify-around dark:text-gray-100 ">
         <li class="">
-            <a class=" <?= $_SERVER['SCRIPT_NAME'] === '/index.php' ? 'active' : ''; ?>" href="/index.php"><?= $config['title']; ?></a>
+            <a class="" href="/index.php"><?= $config['title']; ?></a>
         </li><!-- /nav-item -->
 
         <li class="">
             <?php if (isset($_SESSION['user'])) : ?>
-                <a class="" href="/profile.php">Profile</a>
+                <a class="" href="/myProfile.php"><?= $_SESSION['user']['alias'] ?></a>
             <?php endif; ?>
         </li><!-- /nav-item -->
 
@@ -15,7 +15,7 @@
             <?php if (isset($_SESSION['user'])) : ?>
                 <a class="" href="/app/users/logout.php">Logout</a>
             <?php else : ?>
-                <a class=" <?= $_SERVER['SCRIPT_NAME'] === '/login.php' ? 'active' : ''; ?>" href="login.php">Login</a>
+                <a class="" href="login.php">Login</a>
             <?php endif; ?>
         </li><!-- /nav-item -->
     </ul><!-- /navbar-nav -->

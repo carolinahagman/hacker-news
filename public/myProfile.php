@@ -15,9 +15,9 @@ if (!loggedIn()) {
     </div>
     <p><?= $_SESSION['user']['biography']; ?></p>
     <ul>
-        <li><button>POSTS</button></li>
-        <li><button>COMMENTS</button></li>
-        <li><button>UPVOTES</button></li>
+        <li><a href="">POSTS</a></li>
+        <li><a href="">COMMENTS</a></li>
+        <li><a href="">UPVOTES</a></li>
     </ul>
 </section>
 <section>
