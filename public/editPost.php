@@ -1,18 +1,16 @@
 <?php require __DIR__ . '/app/autoload.php';
  require __DIR__ . '/views/header.php';
 
-f (!loggedIn()) {
+if (!loggedIn()) {
     redirect('/');
-}
-?>
-
+} ?>
 
 <section>
         <form class="flex flex-col items-center" action="/app/posts/store.php" method="post" enctype="multipart/form-data">
             <h1>New Post</h1>
             <div class="">
                 <label for="title" class="">title</label>
-                <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" type="text" name="title" id="title" required>
+                <input class="bg-transparent focus:ring-gray-500 focus:border-gray-500 block mb-2 w-full pl-2 pr-12 sm:text-sm border-gray-300 rounded-md placeholder-gray-600 focus:placeholder-gray-200 dark:placeholder-gray-200 dark:focus:placeholder-gray-600 dark:text-gray-200" placeholder="<?=?>" type="text" name="title" id="title" required>
             </div>
             <div class="">
                 <label for="link" class="">link</label>

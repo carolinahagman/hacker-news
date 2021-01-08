@@ -18,8 +18,9 @@ if (isset($_POST["submit"])) {
     $fileEnding = explode(".", $postImage['name'])[1];
 
     if (($fileFormat === 'image/svg' || $fileFormat === 'image/jpg' || $fileFormat === 'image/jpeg' || $fileFormat === 'image/png') && $fileSize <= 2000000) {
-        $imageName = date('j-m-y') . '.' . $fileEnding;
+        $imageName = date('ymd') . $postTitle . '.' . $fileEnding;
         $destination = __DIR__ . '/uploads/' . $imageName;
+        move_uploaded_file($post['tmp_name'], $destination);
     }
 
     $statement = $database->prepare('INSERT INTO posts (user_id, content, create_date, title, link, image, update_date) VALUES (:userId, :postContent, :dateCreated, :postTitle, :postLink, :imageName, :updateDate);');

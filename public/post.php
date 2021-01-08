@@ -6,6 +6,7 @@
         <a href="">
             <h1>This is the title</h1>
         </a>
+        <img class="w-24" src="/app/posts/uploads/8-01-21.JPEG" alt="">
         <p>This is where the content will be</p>
     </article>
     <div>
