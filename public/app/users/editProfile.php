@@ -30,13 +30,11 @@ if (isset($_POST['change-alias'])) {
     }
 }
 if (isset($_POST['change-biography'])) {
-
     $biography = filter_var($_POST['change-biography'], FILTER_SANITIZE_STRING);
     addBiography($database, $biography, $_SESSION['user']['id']);
     $_SESSION['user']['biography'] = $biography;
 }
 if (isset($_POST['change-email'])) {
-
     $email = filter_var($_POST['change-email'], FILTER_SANITIZE_EMAIL);
     if (emailExists($database, $email)) {
         $_SESSION['message'] = "email already taken";

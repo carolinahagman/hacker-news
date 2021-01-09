@@ -1,9 +1,13 @@
-<?php require __DIR__ . '/app/autoload.php';
+<?php
+
+require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
 if (!loggedIn()) {
     redirect('/');
-} ?>
+}
+?>
+
 <section class="dark:text-white">
     <div>
         <img src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
