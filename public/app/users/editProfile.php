@@ -3,22 +3,13 @@
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
-$errors = [];
 
 if (isset($_FILES['change-avatar'])) {
     $avatar = $_FILES['change-avatar'];
-    // redirect('/profile.php');
-    // die(var_dump($avatar));
-    if (!in_array($avatar['type'], ['image/jpeg', 'image/png', 'image/jpg', 'image/svg'])) {
-        $errors[] = 'The uploaded file type is not allowed.';
-        $_SESSION['error'] = 'The uploaded file type is not allowed.';
-    }
-    if ($avatar['size'] > 2097152) {
-        $errors[] = 'The uploaded file exceeded the filesize limit.';
-        $_SESSION['error'] = 'The uploaded file exceeded the filesize limit.';
-    }
+    $fileType = $avatar['type'];
+    $fileSize = $avatar['size'];
 
-    if (count($errors) === 0) {
+    if (($fileType === 'image/svg' || $fileType === 'image/jpg' || $fileType === 'image/jpeg' || $fileType === 'image/png') && $fileSize <= 2000000) {
         $fileFormat = explode(".", $avatar['name'])[1];
         $avatarName = $_SESSION['user']['id'] . '.' . $fileFormat;
         $destination = __DIR__ . '/uploads/' . $avatarName;
