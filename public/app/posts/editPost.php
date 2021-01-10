@@ -36,7 +36,7 @@ if (isset($_FILES['updated-image'])) {
     }
 }
 if (isset($_POST['updated-content'])) {
-	$updatedContent =  filter_var$_POST['updated-content', FILTER_SANITIZE_STRING];
+    $updatedContent =  filter_var($_POST['updated-content'], FILTER_SANITIZE_STRING);
     updatePostContent($database, $updatedContent, $postId);
 }
 if (isset($_POST['delete-post'])) {
