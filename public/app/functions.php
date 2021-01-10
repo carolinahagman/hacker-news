@@ -96,7 +96,7 @@ function updatePwd($database, $password, $userId): void
 //get all posts in an array
 function getAllPosts($database): array
 {
-	$statement = $database->query('SELECT posts.id, posts.title, posts.link, posts.content, posts.create_date, posts.user_id, users.alias
+	$statement = $database->query('SELECT posts.id, posts.title, posts.link, posts.content, posts.create_date, posts.image, posts.user_id, users.alias
 	FROM posts INNER JOIN users on users.id = posts.user_id;');
 	$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 	return $posts;
@@ -176,4 +176,14 @@ function sortByComments($post1, $post2): int
 {
 	return 1;
 	// return $post2['upvotes']
+}
+
+//FUNCTIONS FOR COMMENTS
+function addComment($database, $comment, $postId, $userId): void
+{
+	$statement = $database->prepare('INSERT INTO comments (post_id, user_id, content) VALUES (:postId, :userId, :content);');
+	$statement->bindParam(':postId', $postId);
+	$statement->bindParam(':userId', $userId);
+	$statement->bindParam(':content', $comment);
+	$statement->execute();
 }

@@ -32,7 +32,7 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [ ] As a user I'm able to view most upvoted posts.
 
-- [ ] As a user I'm able to view new posts.
+- [x] As a user I'm able to view new posts.
 
 - [ ] As a user I should be able to upvote posts.
 

@@ -10,7 +10,7 @@ if (isset($_FILES['change-avatar'])) {
 	$fileSize = $avatar['size'];
 
 	if (($fileType === 'image/svg' || $fileType === 'image/jpg' || $fileType === 'image/jpeg' || $fileType === 'image/png') && $fileSize <= 2000000) {
-		$fileFormat = explode(".", $avatar['name'])[1];
+		$fileFormat = explode("/", $fileType)[1];
 		$avatarName = $_SESSION['user']['id'] . '.' . $fileFormat;
 		$destination = __DIR__ . '/uploads/' . $avatarName;
 		// die(var_dump($destination));

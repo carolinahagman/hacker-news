@@ -14,11 +14,11 @@ $postId = $_GET['id'];
 <?php
 // die(var_dump($postId));
 if (isset($_POST['updated-title'])) {
-    $updatedTitle = $_POST['updated-title'];
+    $updatedTitle = filter_var($_POST['updated-title'], FILTER_SANITIZE_STRING);
     updatePostTitle($database, $updatedTitle, $postId);
 }
 if (isset($_POST['updated-link'])) {
-    $updatedLink = $_POST['updated-link'];
+    $updatedLink = filter_var($_POST['updated-link'], FILTER_SANITIZE_URL);
     updatePostLink($database, $updatedLink, $postId);
 }
 if (isset($_FILES['updated-image'])) {
@@ -36,7 +36,7 @@ if (isset($_FILES['updated-image'])) {
     }
 }
 if (isset($_POST['updated-content'])) {
-    $updatedContent = $_POST['updated-content'];
+	$updatedContent =  filter_var$_POST['updated-content', FILTER_SANITIZE_STRING];
     updatePostContent($database, $updatedContent, $postId);
 }
 if (isset($_POST['delete-post'])) {
