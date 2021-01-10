@@ -12,7 +12,7 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 - Sqlite
 - Javascript
 
-##
+## Features
 
 - [x]As a user I should be able to create an account.
 
@@ -26,9 +26,9 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [x] As a user I should be able to create new posts with title, link and description.
 
-- [ ] As a user I should be able to edit my posts.
+- [x] As a user I should be able to edit my posts.
 
-- [ ] As a user I should be able to delete my posts.
+- [x] As a user I should be able to delete my posts.
 
 - [ ] As a user I'm able to view most upvoted posts.
 
@@ -43,6 +43,12 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 - [ ] As a user I'm able to edit my comments.
 
 - [ ] As a user I'm able to delete my comments.
+
+- [ ] As a user I'm able to reply to comments.
+
+- [ ] As a user I'm able to delete my account along with all posts, upvotes and comments.
+
+- [ ] As a user I'm able to resetting my password with email.
 
 ## Installation
 
