@@ -161,3 +161,19 @@ function deletePost($database, $postId): void
 	$statement->bindParam(':postId', $postId);
 	$statement->execute();
 }
+
+function sortByDate($post1, $post2): int
+{
+	return $post2['create_date'] - $post1['create_date'];
+}
+
+function sortByUpvotes($post1, $post2): int
+{
+	return 1;
+	// return $post2['upvotes']
+}
+function sortByComments($post1, $post2): int
+{
+	return 1;
+	// return $post2['upvotes']
+}

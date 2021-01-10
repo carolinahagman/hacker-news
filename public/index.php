@@ -3,12 +3,39 @@
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
-$posts = getAllPosts($database); ?>
+$posts = getAllPosts($database);
+$sorting = 'new';
+if (isset($_GET['sorting'])) {
+	$sorting = $_GET['sorting'];
+}
+switch ($sorting) {
+	case 'upvote':
+		usort($posts, "sortByUpvotes");
+		break;
+	case 'comment':
+		usort($posts, "sortByComments");
+		break;
+
+	default:
+		usort($posts, "sortByDate");
+		break;
+}
+?>
 <main>
 	<ul class="flex justify-center ">
-		<li class="mx-1">new</li>
-		<li class="mx-1">upvotes</li>
-		<li class="mx-1">comments</li>
+		<li class="mx-1 <?php $sorting === 'new' ? 'selected' : '' ?>">
+			<form action="/?sorting=new" method="POST">
+				<button type="submit" id="new-sorting-btn" class=""> new </button>
+			</form>
+		</li>
+		<li class="mx-1 <?php $sorting === 'upvote' ? 'selected' : '' ?>">
+			<form action="/?sorting=upvote" method="POST">
+				<button type="submit" id="upvote-sorting-btn" class=""> upvotes </button>
+			</form>
+		</li>
+		<li class="mx-1 <?php $sorting === 'comment' ? 'selected' : '' ?>">
+			<form action="/?sorting=comment" method="POST"><button type="submit" id="comment-sorting-btn" class=""> comments </button></form>
+		</li>
 	</ul>
 	<section class="flex flex-col items-center ">
 		<?php foreach ($posts as $post) :

@@ -1,5 +1,8 @@
 const deletePostBtn = document.querySelector("#delete-post-btn");
 const deleteProfileBtn = document.querySelector("#delete-profile-btn");
+const newSortingBtn = document.querySelector("#new-sorting-btn");
+const upvoteSortingBtn = document.querySelector("#upvote-sorting-btn");
+const commentSortingBtn = document.querySelector("#comment-sorting-btn");
 
 if (deletePostBtn) {
 	deletePostBtn.addEventListener("click", (e) => {

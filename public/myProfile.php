@@ -10,7 +10,7 @@ if (!loggedIn()) {
 
 <section class="dark:text-white">
 	<div>
-		<img src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
+		<img class="w-32 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
 		<ul>
 			<li><?= $_SESSION['user']['alias']; ?></li>
 			<li>created at <?= $_SESSION['user']['create_date']; ?></li>
@@ -25,7 +25,7 @@ if (!loggedIn()) {
 	</ul>
 </section>
 <section>
-	<img src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
+	<img class="w-16 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
 	<form class="flex flex-col items-center" action="/app/users/editProfile.php" method="post" enctype="multipart/form-data">
 		<div class="">
 			<label for="change-avatar" class="">change avatar</label>
