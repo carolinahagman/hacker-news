@@ -50,4 +50,4 @@ if (isset($_POST['change-password'])) {
     $_SESSION['user']['password'] = $updatedPwd;
 }
 
-redirect('/profile.php');
+redirect('/myProfile.php');

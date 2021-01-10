@@ -23,20 +23,7 @@ if (isset($_POST["submit"])) {
         $destination = __DIR__ . '/uploads/' . $imageName;
         move_uploaded_file($postImage['tmp_name'], $destination);
     }
-
-    $statement = $database->prepare('INSERT INTO posts (user_id, content, create_date, title, link, image, update_date) VALUES (:userId, :postContent, :dateCreated, :postTitle, :postLink, :imageName, :updateDate);');
-
-    if (!$statement) {
-        die(var_dump($database->errorInfo()));
-    }
-    $statement->BindParam(':userId', $userId);
-    $statement->BindParam(':postContent', $postContent);
-    $statement->BindParam(':dateCreated', $dateCreated);
-    $statement->BindParam(':postTitle', $postTitle);
-    $statement->BindParam(':postLink', $postLink);
-    $statement->BindParam(':imageName', $imageName);
-    $statement->BindParam(':updateDate', $updateDate);
-    $statement->execute();
+    createNewPost($database, $userId, $postContent, $dateCreated, $postTitle, $postLink, $imageName, $updateDate);
     $id = $database->lastInsertId();
     redirect("/post.php?id=${id}");
 }

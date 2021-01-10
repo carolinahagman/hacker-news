@@ -7,7 +7,7 @@ function redirect(string $path)
     header("Location: ${path}");
     exit;
 }
-
+//FUNCTIONS FOR USERS
 //check if alias or email exists
 function aliasExists($database, $alias): bool
 {
@@ -58,7 +58,6 @@ function addAvatar($database, $avatar, $userId): void
     $statement->bindParam(':userId', $userId);
     $statement->execute();
 }
-
 function addBiography($database, $biography, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET biography = :biography WHERE id = :userId;');
@@ -66,7 +65,6 @@ function addBiography($database, $biography, $userId): void
     $statement->bindParam(':userId', $userId);
     $statement->execute();
 }
-
 function updateAlias($database, $alias, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET alias = :alias WHERE id = :userId;');
@@ -74,7 +72,6 @@ function updateAlias($database, $alias, $userId): void
     $statement->bindParam(':userId', $userId);
     $statement->execute();
 }
-
 function updateEmail($database, $email, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET email = :email WHERE id = :userId;');
@@ -82,7 +79,6 @@ function updateEmail($database, $email, $userId): void
     $statement->bindParam(':userId', $userId);
     $statement->execute();
 }
-
 function updatePwd($database, $password, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET password = :password WHERE id = :userId;');
@@ -91,13 +87,14 @@ function updatePwd($database, $password, $userId): void
     $statement->execute();
 }
 
+//FUNCTIONS FOR POSTS
+//get all posts in an array
 function getAllPosts($database): array
 {
     $statement = $database->query('SELECT * FROM posts');
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }
-
 function getPostById($database, $postId): array
 {
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
@@ -106,4 +103,55 @@ function getPostById($database, $postId): array
 
     $post = $statement->fetch(PDO::FETCH_ASSOC);
     return $post;
+}
+function createNewPost($database, $userId, $postContent, $dateCreated, $postTitle, $postLink, $imageName, $updateDate): void
+{
+    $statement = $database->prepare('INSERT INTO posts (user_id, content, create_date, title, link, image, update_date) VALUES (:userId, :postContent, :dateCreated, :postTitle, :postLink, :imageName, :updateDate);');
+
+    if (!$statement) {
+        die(var_dump($database->errorInfo()));
+    }
+    $statement->BindParam(':userId', $userId);
+    $statement->BindParam(':postContent', $postContent);
+    $statement->BindParam(':dateCreated', $dateCreated);
+    $statement->BindParam(':postTitle', $postTitle);
+    $statement->BindParam(':postLink', $postLink);
+    $statement->BindParam(':imageName', $imageName);
+    $statement->BindParam(':updateDate', $updateDate);
+    $statement->execute();
+}
+//update database with new inputs
+function updatePostTitle($database, $updatedTitle, $postId): void
+{
+    $statement = $database->prepare('UPDATE posts SET title  = :updatedTitle WHERE id = :postId;');
+    $statement->bindParam(':updatedTitle', $updatedTitle);
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+}
+function updatePostLink($database, $updatedLink, $postId): void
+{
+    $statement = $database->prepare('UPDATE posts SET link  = :updatedLink WHERE id = :postId;');
+    $statement->bindParam(':updatedLink', $updatedLink);
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+}
+function updatePostImage($database, $updatedImage, $postId): void
+{
+    $statement = $database->prepare('UPDATE posts SET image  = :updatedImage WHERE id = :postId;');
+    $statement->bindParam(':updatedImage', $updatedImage);
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+}
+function updatePostContent($database, $updatedContent, $postId): void
+{
+    $statement = $database->prepare('UPDATE posts SET content  = :updatedContent WHERE id = :postId;');
+    $statement->bindParam(':updatedContent', $updatedContent);
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+}
+function deletePost($database, $postId): void
+{
+    $statement = $database->prepare('DELETE FROM posts where id = :postId');
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
 }
