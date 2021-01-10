@@ -2,7 +2,7 @@
 
 	<ul class="w-full flex justify-around dark:text-gray-600 ">
 		<li class="">
-			<a class="text-yellow-600 uppercase font-bold" href="/index.php"><?= $config['title']; ?></a>
+			<a class="text-yellow-600 uppercase font-bold text-xl" href="/index.php"><?= $config['title']; ?></a>
 		</li><!-- /nav-item -->
 
 		<li class="">

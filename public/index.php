@@ -10,17 +10,21 @@ $posts = getAllPosts($database); ?>
 		<li class="mx-1">upvotes</li>
 		<li class="mx-1">comments</li>
 	</ul>
-	<section>
+	<section class="flex flex-col items-center ">
 		<?php foreach ($posts as $post) :
 		?>
-			<a class="" href="/post.php?id=<?= $post['id'] ?>">
-				<div>upvotes</div>
-				<div>
-					<h1><?= $post['title']; ?> <a class="" href="<?= $post['link']; ?>">(link)</a></h1>
-					<small>posted by <?= $post['alias']; ?></small>
-					<p><?= $post['create_date']; ?></p>
-				</div>
-				<div><img src="" alt=""> </div>
+			<div class="w-11/12 max-w-md bg-gray-50 rounded-md m-1 "><a class="w-full " href="/post.php?id=<?= $post['id'] ?>">
+					<div>upvotes</div>
+					<div>
+						<h1 class="text-md font-semibold uppercase"><?= $post['title']; ?> <a class="text-sm font-thin" href="<?= $post['link']; ?>">(link)</a></h1>
+						<small class="font-thin">posted by <?= $post['alias']; ?></small>
+						<p><?= $post['create_date']; ?></p>
+					</div>
+					<div><img src="" alt="">
+						<p><?php if (isset($_SESSION['user'])) : ?>Comment</p>
+					<?php endif; ?><p>4 comments</p>
+					</div>
+			</div>
 			</a>
 		<?php endforeach; ?>
 	</section>

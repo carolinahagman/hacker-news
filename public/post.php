@@ -1,6 +1,9 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php';
-$user = $_SESSION['user'];
+if (isset($_SESSION['user'])) {
+	$user = $_SESSION['user'];
+}
+
 $id = $_GET['id'];
 $post = getPostById($database, $id); ?>
 
@@ -15,9 +18,12 @@ $post = getPostById($database, $id); ?>
 	<div>
 		<p><?= $post['create_date']; ?></p>
 		<p>upvotes</p>
-		<?php if ($user['id'] === $post['user_id']) : ?>
-			<a href="/editPost.php?id=<?= $id ?>">Edit</a>
-		<?php endif; ?>
+		<?php if (isset($_SESSION['user'])) :
+			$user = $_SESSION['user'];
+			if ($user['id'] === $post['user_id']) : ?>
+				<a href="/editPost.php?id=<?= $id ?>">Edit</a>
+		<?php endif;
+		endif; ?>
 	</div>
 	<section>
 		<div class="">
