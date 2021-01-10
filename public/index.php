@@ -4,6 +4,7 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
 $posts = getAllPosts($database);
+
 $sorting = 'new';
 if (isset($_GET['sorting'])) {
     $sorting = $_GET['sorting'];
@@ -43,15 +44,18 @@ switch ($sorting) {
             <div class="w-11/12 max-w-md bg-gray-50 rounded-md m-1 "><a class="w-full " href="/post.php?id=<?= $post['id'] ?>">
                     <div>upvotes</div>
                     <div>
-                        <h1 class="text-md font-semibold uppercase"><?= $post['title']; ?> <a class="text-sm font-thin lowercase" href="<?= $post['link']; ?>">(link)</a></h1>
+                        <h1 class="text-md font-semibold uppercase"><?= $post['title']; ?> <?php
+                                                                                            if (strlen($post['link']) !== 0) : ?><a class="text-sm font-thin lowercase" href="<?= $post['link']; ?>">(link)</a><?php endif; ?></h1>
                         <small class="font-thin">posted by <?= $post['alias']; ?></small>
                         <p><?= $post['create_date']; ?></p>
                     </div>
-                    <div> <img src="/app/posts/uploads/<?= $post['image'] ?>" alt="">
-                        <p> <?php if (isset($_SESSION['user'])) : ?>Comment</p>
-                    <?php endif; ?><p>4 comments</p>
-
+                    <div class=""> <?php
+                                    if (strlen($post['image']) !== 0) : ?><img class="w-16 h-16 object-cover" src="/app/posts/uploads/<?= $post['image'] ?>" alt=""><?php endif; ?>
+                        <?php if (isset($_SESSION['user'])) : ?> <p>Comment</p>
+                        <?php endif; ?><p>4 comments</p>
                     </div>
+
+
             </div>
             </a>
         <?php endforeach; ?>

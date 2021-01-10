@@ -45,6 +45,10 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
     $statement->bindParam(':create_date', $dateCreated, PDO::PARAM_STR);
     $statement->execute();
 }
+//TODO: get user data
+function getUserProfile()
+{
+};
 //delete user
 function deleteUser($database, $userId)
 {
@@ -186,4 +190,14 @@ function addComment($database, $comment, $postId, $userId): void
     $statement->bindParam(':userId', $userId);
     $statement->bindParam(':content', $comment);
     $statement->execute();
+}
+
+function getCommentsByPostId($database, $postId): array
+{
+    $statement = $database->prepare('SELECT * FROM comments INNER JOIN users on comments.user_id = users.id WHERE comments.post_id = :postId');
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $comments;
 }

@@ -5,7 +5,11 @@ if (isset($_SESSION['user'])) {
 }
 
 $id = $_GET['id'];
-$post = getPostById($database, $id); ?>
+$post = getPostById($database, $id);
+$comments = getCommentsByPostId($database, $id);
+
+?>
+
 
 <main>
     <article>
@@ -33,6 +37,14 @@ $post = getPostById($database, $id); ?>
                 <button type="submit" name="submit" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900 dark:text-gray-200 dark:bg-gray-800">Comment</button>
             </div>
         </form>
+        <?php foreach ($comments as $comment) : ?>
+            <div><small><?= $comment['alias'] ?></small>
+                <div>
+                    <p><?= $comment['content'] ?></p>
+                    <p>*</p>
+                </div>
+            </div>
+        <?php endforeach; ?>
 
     </section>
 
