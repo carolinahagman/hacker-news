@@ -4,7 +4,6 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
 $posts = getAllPosts($database);
-
 $sorting = 'new';
 if (isset($_GET['sorting'])) {
     $sorting = $_GET['sorting'];
@@ -52,7 +51,7 @@ switch ($sorting) {
                     <div class=""> <?php
                                     if (strlen($post['image']) !== 0) : ?><img class="w-16 h-16 object-cover" src="/app/posts/uploads/<?= $post['image'] ?>" alt=""><?php endif; ?>
                         <?php if (isset($_SESSION['user'])) : ?> <p>Comment</p>
-                        <?php endif; ?><p>4 comments</p>
+                        <?php endif; ?><p><?= countComments($database, $post['id']) ?></p>
                     </div>
 
 

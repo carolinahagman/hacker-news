@@ -201,3 +201,10 @@ function getCommentsByPostId($database, $postId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
+
+function countComments($database, $postId)
+{
+    $comments = getCommentsByPostId($database, $postId);
+    $commentsCount = count($comments);
+    return $commentsCount === 1 ? '1 comment' : "$commentsCount comments";
+}
