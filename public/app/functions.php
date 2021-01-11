@@ -49,6 +49,7 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
 function getUserProfile()
 {
 };
+
 //delete user
 function deleteUser($database, $userId)
 {

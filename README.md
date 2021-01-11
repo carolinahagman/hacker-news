@@ -71,7 +71,6 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - The project should not include any coding errors, warning or notices.
 
-- The project must be tested on at least two of your classmates computers. Add the testers name to the `README.md` file.
 </details>
 
 ## Installation

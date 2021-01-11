@@ -9,11 +9,11 @@ if (!loggedIn()) {
 ?>
 <main class="w-full flex flex-col items-center">
     <section class=" w-full max-w-md flex flex-col items-center shadow-md rounded-lg">
-        <div class="flex">
-            <img class="w-20 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
-            <ul class="mt-6 ml-4">
+        <div class="flex mt-3">
+            <img class="w-20 h-12 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
+            <ul class=" ml-4">
                 <li class="text-lg"><?= $_SESSION['user']['alias']; ?></li>
-                <li class="text-xs">created at <?= $_SESSION['user']['create_date']; ?></li>
+                <li class="text-sm">created at <?= $_SESSION['user']['create_date']; ?></li>
                 <li><button class="font-semibold">edit profile</button></li>
             </ul>
         </div>
@@ -24,8 +24,8 @@ if (!loggedIn()) {
             <li><a href="">UPVOTES</a></li>
         </ul>
     </section>
-    <section class="w-full max-w-md flex flex-col items-center shadow-md rounded-lg">
-        <img class="w-12 mt-2 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
+    <section class="w-full max-w-md flex flex-col items-center shadow-md rounded-lg py-2">
+        <img class="w-12 h-12 mt-2 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
         <form class="w-full flex flex-col items-center" action="/app/users/editProfile.php" method="post" enctype="multipart/form-data">
             <div class="flex flex-col items-center">
                 <label for="change-avatar" class="">change avatar</label>
@@ -49,9 +49,9 @@ if (!loggedIn()) {
             </div>
             <button type="submit" name="submit" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900 dark:text-gray-200 dark:bg-gray-800">Update</button>
         </form>
-        <!-- <form class="flex flex-col items-center" action="/app/users/editProfile.php" id="delete-profile-form" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="delete-profile" value="true">
-		<button type="submit" name="delete-profile-btn" id="delete-profile-btn" class="text-center text-lg w-28 bg-red-600 rounded-sm mt-2 uppercase text-gray-900 dark:text-gray-200">Delete</button>
-	</form> -->
+        <form class="flex flex-col items-center" action="/app/users/editProfile.php" id="delete-profile-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="delete-profile" value="true">
+            <button type="submit" name="delete-profile-btn" id="delete-profile-btn" class="text-center text-lg w-28 bg-red-600 rounded-sm mt-2 uppercase text-gray-900 dark:text-gray-200">Delete</button>
+        </form>
     </section>
 </main>

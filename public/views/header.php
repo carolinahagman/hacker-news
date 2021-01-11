@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="/assets/styles/custom-styles.css">
     <title><?php echo $config['title']; ?></title>
 </head>
 
