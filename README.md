@@ -52,16 +52,26 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 </details>
 
 <details><summary> Requirements </summary>
--   The application should be written in HTML, CSS, JavaScript, SQL and PHP.
--   The application should be built using a SQLite database with at least four different tables.
--   The application should be pushed to a public repository on [GitHub](https://github.com/).
--   The application should be responsive and be built using the method mobile-first.
--   The application should be implement secure [hashed passwords](https://secure.php.net/manual/en/function.password-hash.php) when signing up. <br>
--   The project should contain the files and directories in the [`resources`](resources) folder in the root of your repository. <br>
--   The project should implement an [accessible](https://a11yproject.com/checklist/) [graphical user interface](https://en.m.wikipedia.org/wiki/Graphical_user_interface).
--   The project should [declare strict types](https://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict) in files containing only PHP code.
--   The project should not include any coding errors, warning or notices.
--   The project must be tested on at least two of your classmates computers. Add the testers name to the `README.md` file.
+
+- The application should be written in HTML, CSS, JavaScript, SQL and PHP.
+
+- The application should be built using a SQLite database with at least four different tables.
+
+- The application should be pushed to a public repository on [GitHub](https://github.com/).
+
+- The application should be responsive and be built using the method mobile-first.
+
+- The application should be implement secure [hashed passwords](https://secure.php.net/manual/en/function.password-hash.php) when signing up.
+
+- The project should contain the files and directories in the [`resources`](resources) folder in the root of your repository.
+
+- The project should implement an [accessible](https://a11yproject.com/checklist/) [graphical user interface](https://en.m.wikipedia.org/wiki/Graphical_user_interface).
+
+- The project should [declare strict types](https://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict) in files containing only PHP code.
+
+- The project should not include any coding errors, warning or notices.
+
+- The project must be tested on at least two of your classmates computers. Add the testers name to the `README.md` file.
 </details>
 
 ## Installation
