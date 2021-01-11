@@ -1,4 +1,4 @@
-<nav class="w-screen p-3 flex justify-center">
+<nav class="w-screen p-3 flex justify-center bg-white sticky top-0">
 
     <ul class="w-full max-w-2xl flex justify-evenly dark:text-gray-600 ">
         <li class="">

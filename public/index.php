@@ -63,8 +63,8 @@ switch ($sorting) {
             </a>
         <?php endforeach; ?>
     </section>
-    <div class="flex justify-center w-full fixed bottom-2"><?php if (isset($_SESSION['user'])) : ?>
-            <a class="text-6xl" href="/newPost.php">+</a>
+    <div class="flex justify-center w-full sticky bottom-0"><?php if (isset($_SESSION['user'])) : ?>
+            <a class="text-4xl text-center w-full bg-yellow-600 bg-opacity-30" href="/newPost.php">+</a>
         <?php endif; ?>
     </div>
 </main>
