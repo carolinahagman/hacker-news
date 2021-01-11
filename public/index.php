@@ -64,7 +64,7 @@ switch ($sorting) {
         <?php endforeach; ?>
     </section>
     <div class="flex justify-center w-full sticky bottom-0"><?php if (isset($_SESSION['user'])) : ?>
-            <a class="text-4xl text-center w-full bg-yellow-600 bg-opacity-30" href="/newPost.php">+</a>
+            <a class="text-4xl text-center w-full bg-white pb-2" href="/newPost.php">+</a>
         <?php endif; ?>
     </div>
 </main>

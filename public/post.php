@@ -35,8 +35,6 @@ $comments = getCommentsByPostId($database, $id);
                     <a href="/editPost.php?id=<?= $id ?>">Edit</a>
                 <?php endif; ?>
                 <p>upvotes</p>
-
-
         </div>
         <article>
             <form class="" action="/app/posts/addComment.php?id=<?= $id ?>" method="post">
@@ -51,10 +49,14 @@ $comments = getCommentsByPostId($database, $id);
             </form>
         <?php endif; ?>
         <?php foreach ($comments as $comment) : ?>
-            <div><small><?= $comment['alias'] ?></small>
-                <div>
-                    <p><?= $comment['content'] ?></p>
-                    <p>*</p>
+            <div><small class="ml-1"><?= $comment['alias'] ?></small>
+                <div class="flex">
+                    <p class="border rounded-md py-1 pl-2 pr-4 mb-2 "><?= $comment['content'] ?></p>
+                    <button class="ml-1 pb-2"><svg class="" width="3" height="11" viewBox="0 0 3 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="1.5" cy="1.5" r="1.5" fill="#212121" />
+                            <circle cx="1.5" cy="5.5" r="1.5" fill="#212121" />
+                            <circle cx="1.5" cy="9.5" r="1.5" fill="#212121" />
+                        </svg></button>
                 </div>
             </div>
         <?php endforeach; ?>
