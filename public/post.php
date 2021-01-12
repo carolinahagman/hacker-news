@@ -8,6 +8,7 @@ $id = $_GET['id'];
 $post = getPostById($database, $id);
 $comments = getCommentsByPostId($database, $id);
 getUpvotesByPost($database, $id);
+$postDate = formatDate($post['create_date']);
 ?>
 
 <main class="w-full flex flex-col items-center">
@@ -28,7 +29,7 @@ getUpvotesByPost($database, $id);
             <p class=""><?= $post['content']; ?></p>
         </article>
         <div class="flex justify-between mb-2 font-thin">
-            <p><?= $post['create_date']; ?></p>
+            <p><?= $postDate; ?></p>
             <?php if (isset($_SESSION['user'])) :
                 $user = $_SESSION['user'];
                 if ($user['id'] === $post['user_id']) : ?>

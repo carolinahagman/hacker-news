@@ -51,6 +51,7 @@ switch ($sorting) {
     <section class="flex flex-col items-center">
         <?php foreach ($posts as $post) :
             $upvotesPosts = getUpvotesByPost($database, $post['id']);
+            $postDate = formatDate($post['create_date']);
         ?>
             <div class="w-11/12 max-w-md bg-gray-50 rounded-md m-1 shadow-sm flex justify-between py-3 pl-1 pr-3">
                 <div class="flex items-center">
@@ -77,7 +78,7 @@ switch ($sorting) {
                         </h1>
                         <small class="font-thin ">posted by
                             <a href="/profile.php?alias=<?= $post['alias'] ?>"><?= $post['alias']; ?> </a> </small>
-                        <p><?= $post['create_date']; ?></p>
+                        <small><?= $postDate ?></small>
                     </div>
                 </div>
                 <div class="flex flex-col items-end justify-between">

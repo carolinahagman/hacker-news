@@ -288,3 +288,9 @@ function hasUserUpvotedPost($database, $postId, $userId): bool
     $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
     return !!$upvoteExists;
 }
+
+function formatDate($date): string
+{
+    $dateCreate = (date_create($date));
+    return (date_format($dateCreate, 'jS F Y'));
+}
