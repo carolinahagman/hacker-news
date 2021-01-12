@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     mode: "layers",
-    content: [".public/**/*.php"],
+    content: ["./public/**/*.php"],
   },
   darkMode: "media", // or 'media' or 'class'
   theme: {
