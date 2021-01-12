@@ -21,6 +21,7 @@ $comments = getCommentsByPostId($database, $id);
                 </h1>
             </a>
             <?php
+
             if (strlen($post['image']) !== 0) : ?><img class="w-full py-2" src="/app/posts/uploads/<?= $post['image'] ?>" alt="">
             <?php endif; ?>
             <p class=""><?= $post['content']; ?></p>
@@ -58,18 +59,20 @@ $comments = getCommentsByPostId($database, $id);
                 <div><a href="/profile.php?alias=<?= $comment['alias'] ?>" class="ml-1"><?= $comment['alias'] ?></a>
                     <div class="flex">
                         <p class="border rounded-md py-1 pl-2 pr-4 mb-2 "><?= $comment['content'] ?></p>
-                        <?php if ($_SESSION['user']['alias'] === $comment['alias']) : ?>
-                            <div class="dropdown">
-                                <button class="pl-2 " id="dropbtn"><svg class="" width="3" height="11" viewBox="0 0 3 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="1.5" cy="1.5" r="1.5" fill="#212121" />
-                                        <circle cx="1.5" cy="5.5" r="1.5" fill="#212121" />
-                                        <circle cx="1.5" cy="9.5" r="1.5" fill="#212121" />
-                                    </svg></button>
-                                <div id="myDropdown" class="dropdown-content">
-                                    <a href="/app/posts/addComment.php?id=<?= $id ?>&action=edit">Edit</a>
-                                    <a href="/app/posts/addComment.php?id=<?= $id ?>&action=delete">Delete</a>
+                        <?php if (isset($_SESSION['user'])) :
+                            if ($_SESSION['user']['alias'] === $comment['alias']) : ?>
+                                <div class="dropdown">
+                                    <button class="pl-2 " id="dropbtn"><svg class="" width="3" height="11" viewBox="0 0 3 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#212121" />
+                                            <circle cx="1.5" cy="5.5" r="1.5" fill="#212121" />
+                                            <circle cx="1.5" cy="9.5" r="1.5" fill="#212121" />
+                                        </svg></button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <a href="/app/posts/addComment.php?id=<?= $id ?>&action=edit">Edit</a>
+                                        <a href="/app/posts/addComment.php?id=<?= $id ?>&action=delete">Delete</a>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>

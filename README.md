@@ -42,7 +42,7 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [ ] As a user I'm able to edit my comments.
 
-- [ ] As a user I'm able to delete my comments.
+- [x] As a user I'm able to delete my comments.
 
 - [ ] As a user I'm able to reply to comments.
 

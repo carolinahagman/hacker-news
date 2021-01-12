@@ -44,9 +44,7 @@ switch ($sorting) {
     <section class="flex flex-col items-center">
         <?php foreach ($posts as $post) :
         ?>
-
             <div class="w-11/12 max-w-md bg-gray-50 rounded-md m-1 shadow-sm flex justify-between py-3 pl-1 pr-3">
-
                 <div class="flex items-center">
                     <div>
                         <div class="mr-4 arrow-up"></div>
@@ -74,9 +72,7 @@ switch ($sorting) {
                     <a class="w-full flex" href="/post.php?id=<?= $post['id'] ?>" <p class="ml-2"><?= countComments($database, $post['id']) ?></p>
                     </a>
                 </div>
-
             </div>
-
         <?php endforeach; ?>
     </section>
     <div class="flex justify-center w-full sticky bottom-0">
