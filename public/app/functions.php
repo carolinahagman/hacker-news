@@ -60,6 +60,21 @@ function getUserProfile($database, $alias): array
 function deleteUser($database, $userId)
 {
     $statement = $database->prepare('DELETE FROM posts WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId);
+    $statement->execute();
+
+    $statement = $database->prepare('DELETE FROM upvotes WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId);
+    $statement->execute();
+
+    $statement = $database->prepare('DELETE FROM comments WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId);
+    $statement->execute();
+
+    $statement = $database->prepare('DELETE FROM users WHERE id = :userId');
+    $statement->bindParam(':userId', $userId);
+    $statement->execute();
+    session_destroy();
 }
 //check if user is logged in
 function loggedIn(): bool

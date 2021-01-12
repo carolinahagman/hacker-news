@@ -46,7 +46,7 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [ ] As a user I'm able to reply to comments.
 
-- [ ] As a user I'm able to delete my account along with all posts, upvotes and comments.
+- [x] As a user I'm able to delete my account along with all posts, upvotes and comments.
 
 - [ ] As a user I'm able to resetting my password with email.
 </details>
