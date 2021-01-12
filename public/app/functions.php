@@ -46,8 +46,14 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
     $statement->execute();
 }
 //TODO: get user data
-function getUserProfile()
+function getUserProfile($database, $alias): array
 {
+    $statement = $database->prepare('SELECT * FROM users WHERE alias = :alias');
+    $statement->bindParam(':alias', $alias);
+    $statement->execute();
+
+    $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
+    return $userInfo;
 };
 
 //delete user
@@ -208,4 +214,12 @@ function countComments($database, $postId)
     $comments = getCommentsByPostId($database, $postId);
     $commentsCount = count($comments);
     return $commentsCount === 1 ? '1 comment' : "$commentsCount comments";
+}
+
+function deleteComment($database, $postId, $userId): void
+{
+    $statement = $database->prepare('DELETE FROM comments where post_id = :postId AND user_id = :userId');
+    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':userId', $userId);
+    $statement->execute();
 }

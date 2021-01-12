@@ -5,20 +5,26 @@ require __DIR__ . '/views/header.php';
 
 if (!loggedIn()) {
     redirect('/');
-} ?>
+}
 
-<section class="dark:text-white">
-    <div>
-        <img class="w-32 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
-        <ul>
-            <li><?= $user['alias']; ?></li>
-            <li>created at <?= $user['create_date']; ?></li>
+$alias = $_GET['alias'];
+$userInfo = getUserProfile($database, $alias);
+
+?>
+<main class="w-full flex flex-col items-center">
+    <section class=" w-full max-w-md flex flex-col items-center shadow-md rounded-lg">
+        <div class="flex mt-3">
+            <img class="w-20 h-20 object-cover rounded-full" src="/app/users/uploads/<?= $userInfo['avatar'] ?>" alt="avatar">
+            <ul class=" ml-4">
+                <li class="text-lg"><?= $userInfo['alias']; ?></li>
+                <li class="text-sm">created at <?= $userInfo['create_date']; ?></li>
+
+            </ul>
+        </div>
+        <p class="mt-2 mb-6  justify-self-start"><?= $userInfo['biography']; ?></p>
+        <ul class="pb-10 flex flex-col items-center">
+            <li><a href="">POSTS</a></li>
         </ul>
-    </div>
-    <p><?= $user['biography']; ?></p>
-    <ul>
-        <li><a href="">POSTS</a></li>
-        <li><a href="">COMMENTS</a></li>
-        <li><a href="">UPVOTES</a></li>
-    </ul>
-</section>
+    </section>
+</main>
+<?php require __DIR__ . '/views/footer.php'; ?>

@@ -3,6 +3,8 @@ const deleteProfileBtn = document.querySelector("#delete-profile-btn");
 const newSortingBtn = document.querySelector("#new-sorting-btn");
 const upvoteSortingBtn = document.querySelector("#upvote-sorting-btn");
 const commentSortingBtn = document.querySelector("#comment-sorting-btn");
+const dropBtn = document.querySelector("#dropbtn");
+const dropDown = document.getElementById("myDropdown");
 
 if (deletePostBtn) {
   deletePostBtn.addEventListener("click", (e) => {
@@ -23,3 +25,7 @@ if (deleteProfileBtn) {
     }
   });
 }
+
+dropBtn.addEventListener("click", () => {
+  dropDown.classList.toggle("show");
+});

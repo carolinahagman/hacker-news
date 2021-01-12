@@ -61,7 +61,7 @@ switch ($sorting) {
                             <?php endif; ?>
                         </h1>
                         <small class="font-thin">posted by
-                            <?= $post['alias']; ?></small>
+                            <a href="/profile.php?alias=<?= $post['alias'] ?>"><?= $post['alias']; ?> </a> </small>
                         <p><?= $post['create_date']; ?></p>
                     </div>
                 </div>
@@ -71,9 +71,7 @@ switch ($sorting) {
                     <?php else : ?>
                         <div></div>
                     <?php endif; ?>
-                    <a class="w-full" href="/post.php?id=<?= $post['id'] ?>" <?php if (isset($_SESSION['user'])) : ?> <p>Comment</p>
-                    <?php endif; ?>
-                    <p><?= countComments($database, $post['id']) ?></p>
+                    <a class="w-full flex" href="/post.php?id=<?= $post['id'] ?>" <p class="ml-2"><?= countComments($database, $post['id']) ?></p>
                     </a>
                 </div>
 

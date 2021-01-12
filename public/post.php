@@ -33,7 +33,10 @@ $comments = getCommentsByPostId($database, $id);
                     <a href="/editPost.php?id=<?= $id ?>">Edit</a>
                 <?php endif; ?>
             <?php endif; ?>
-            <p>upvotes</p>
+            <div class="flex">
+                <p>20</p>
+                <div class="mt-2 m-1 arrow-up"></div>
+            </div>
         </div>
         <article>
             <form class="" action="/app/posts/addComment.php?id=<?= $id ?>" method="post">
@@ -52,20 +55,28 @@ $comments = getCommentsByPostId($database, $id);
             </form>
 
             <?php foreach ($comments as $comment) : ?>
-                <div><small class="ml-1"><?= $comment['alias'] ?></small>
+                <div><a href="/profile.php?alias=<?= $comment['alias'] ?>" class="ml-1"><?= $comment['alias'] ?></a>
                     <div class="flex">
                         <p class="border rounded-md py-1 pl-2 pr-4 mb-2 "><?= $comment['content'] ?></p>
-                        <button class="ml-1 pb-2"><svg class="" width="3" height="11" viewBox="0 0 3 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="1.5" cy="1.5" r="1.5" fill="#212121" />
-                                <circle cx="1.5" cy="5.5" r="1.5" fill="#212121" />
-                                <circle cx="1.5" cy="9.5" r="1.5" fill="#212121" />
-                            </svg></button>
+                        <?php if ($_SESSION['user']['alias'] === $comment['alias']) : ?>
+                            <div class="dropdown">
+                                <button class="pl-2 " id="dropbtn"><svg class="" width="3" height="11" viewBox="0 0 3 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="1.5" cy="1.5" r="1.5" fill="#212121" />
+                                        <circle cx="1.5" cy="5.5" r="1.5" fill="#212121" />
+                                        <circle cx="1.5" cy="9.5" r="1.5" fill="#212121" />
+                                    </svg></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="/app/posts/addComment.php?id=<?= $id ?>&action=edit">Edit</a>
+                                    <a href="/app/posts/addComment.php?id=<?= $id ?>&action=delete">Delete</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
 
         </article>
     </section>
-
-
 </main>
+
+<?php require __DIR__ . '/views/footer.php'; ?>

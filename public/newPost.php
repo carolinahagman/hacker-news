@@ -33,3 +33,4 @@ if (!loggedIn()) {
         <button type="submit" name="submit" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900 dark:text-gray-200 dark:bg-gray-800">Upload</button>
     </form>
 </section>
+<?php require __DIR__ . '/views/footer.php'; ?>
