@@ -49,7 +49,7 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
 function getUserProfile($database, $alias): array
 {
     $statement = $database->prepare('SELECT * FROM users WHERE alias = :alias');
-    $statement->bindParam(':alias', $alias);
+    $statement->bindParam(':alias', $alias, PDO::PARAM_STR);
     $statement->execute();
 
     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
@@ -60,19 +60,19 @@ function getUserProfile($database, $alias): array
 function deleteUser($database, $userId)
 {
     $statement = $database->prepare('DELETE FROM posts WHERE user_id = :userId');
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 
     $statement = $database->prepare('DELETE FROM upvotes WHERE user_id = :userId');
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 
     $statement = $database->prepare('DELETE FROM comments WHERE user_id = :userId');
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 
     $statement = $database->prepare('DELETE FROM users WHERE id = :userId');
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
     session_destroy();
 }
@@ -85,39 +85,38 @@ function loggedIn(): bool
 function addAvatar($database, $avatar, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET avatar = :avatar WHERE id = :userId;');
-    $statement->bindParam(':avatar', $avatar);
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':avatar', $avatar, PDO::PARAM_STR);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
 function addBiography($database, $biography, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET biography = :biography WHERE id = :userId;');
-    $statement->bindParam(':biography', $biography);
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
 function updateAlias($database, $alias, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET alias = :alias WHERE id = :userId;');
-    $statement->bindParam(':alias', $alias);
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':alias', $alias, PDO::PARAM_STR);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
 function updateEmail($database, $email, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET email = :email WHERE id = :userId;');
-    $statement->bindParam(':email', $email);
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
 function updatePwd($database, $password, $userId): void
 {
     $statement = $database->prepare('UPDATE users SET password = :password WHERE id = :userId;');
-    $statement->bindParam(':password', $password);
-    $statement->bindParam(':userId', $userId);
+    $statement->bindParam(':password', $password, PDO::PARAM_STR);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
-
 //FUNCTIONS FOR POSTS
 //get all posts in an array
 function getAllPosts($database): array
@@ -130,7 +129,7 @@ function getAllPosts($database): array
 function getPostById($database, $postId): array
 {
     $statement = $database->prepare('SELECT * FROM posts WHERE id = :postId');
-    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 
     $post = $statement->fetch(PDO::FETCH_ASSOC);
@@ -143,83 +142,77 @@ function createNewPost($database, $userId, $postContent, $dateCreated, $postTitl
     if (!$statement) {
         die(var_dump($database->errorInfo()));
     }
-    $statement->BindParam(':userId', $userId);
-    $statement->BindParam(':postContent', $postContent);
-    $statement->BindParam(':dateCreated', $dateCreated);
-    $statement->BindParam(':postTitle', $postTitle);
-    $statement->BindParam(':postLink', $postLink);
-    $statement->BindParam(':imageName', $imageName);
-    $statement->BindParam(':updateDate', $updateDate);
+    $statement->BindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->BindParam(':postContent', $postContent, PDO::PARAM_STR);
+    $statement->BindParam(':dateCreated', $dateCreated, PDO::PARAM_INT);
+    $statement->BindParam(':postTitle', $postTitle, PDO::PARAM_STR);
+    $statement->BindParam(':postLink', $postLink, PDO::PARAM_STR);
+    $statement->BindParam(':imageName', $imageName, PDO::PARAM_STR);
+    $statement->BindParam(':updateDate', $updateDate, PDO::PARAM_INT);
     $statement->execute();
 }
 //update database with new inputs
 function updatePostTitle($database, $updatedTitle, $postId): void
 {
     $statement = $database->prepare('UPDATE posts SET title  = :updatedTitle WHERE id = :postId;');
-    $statement->bindParam(':updatedTitle', $updatedTitle);
-    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':updatedTitle', $updatedTitle, PDO::PARAM_STR);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 }
 function updatePostLink($database, $updatedLink, $postId): void
 {
     $statement = $database->prepare('UPDATE posts SET link  = :updatedLink WHERE id = :postId;');
-    $statement->bindParam(':updatedLink', $updatedLink);
-    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':updatedLink', $updatedLink, PDO::PARAM_STR);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 }
 function updatePostImage($database, $updatedImage, $postId): void
 {
     $statement = $database->prepare('UPDATE posts SET image  = :updatedImage WHERE id = :postId;');
-    $statement->bindParam(':updatedImage', $updatedImage);
-    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':updatedImage', $updatedImage, PDO::PARAM_STR);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 }
 function updatePostContent($database, $updatedContent, $postId): void
 {
     $statement = $database->prepare('UPDATE posts SET content  = :updatedContent WHERE id = :postId;');
-    $statement->bindParam(':updatedContent', $updatedContent);
-    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':updatedContent', $updatedContent, PDO::PARAM_STR);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 }
 function deletePost($database, $postId): void
 {
     $statement = $database->prepare('DELETE FROM posts where id = :postId');
-    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 }
-
 function sortByDate($post1, $post2): int
 {
     return $post2['create_date'] - $post1['create_date'];
 }
-
-function sortByUpvotes($post1, $post2): int
-{
-    return 1;
-    // return $post2['upvotes']
-}
+// function sortByUpvotes($database, $post1, $post2): int
+// {
+// }
 function sortByComments($post1, $post2): int
 {
     return 1;
     // return $post2['upvotes']
 }
-
 //FUNCTIONS FOR COMMENTS
 function addComment($database, $comment, $postId, $userId): void
 {
     $statement = $database->prepare('INSERT INTO comments (post_id, user_id, content) VALUES (:postId, :userId, :content);');
-    $statement->bindParam(':postId', $postId);
-    $statement->bindParam(':userId', $userId);
-    $statement->bindParam(':content', $comment);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->bindParam(':content', $comment, PDO::PARAM_STR);
     $statement->execute();
 }
 
 function getCommentsByPostId($database, $postId): array
 {
-    $statement = $database->prepare('SELECT * FROM comments INNER JOIN users on comments.user_id = users.id WHERE comments.post_id = :postId');
-    $statement->bindParam(':postId', $postId);
+    $statement = $database->prepare('SELECT comments.*, users.alias  FROM comments INNER JOIN users on comments.user_id = users.id WHERE comments.post_id = :postId');
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
-
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
@@ -231,10 +224,67 @@ function countComments($database, $postId)
     return $commentsCount === 1 ? '1 comment' : "$commentsCount comments";
 }
 
-function deleteComment($database, $postId, $userId): void
+function deleteComment($database, $commentId, $userId): void
 {
-    $statement = $database->prepare('DELETE FROM comments where post_id = :postId AND user_id = :userId');
-    $statement->bindParam(':postId', $postId);
-    $statement->bindParam(':userId', $userId);
+    $statement = $database->prepare('DELETE FROM comments where id = :commentId AND user_id = :userId');
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
+}
+
+function addUpvote($database, $userId, $postId): void
+{
+    //  $userId = (int) $userIdStr;
+    //    $postId = (int) $postIdStr;
+
+    $statement = $database->prepare('insert into upvotes (post_id, user_id) values (:postId, :userId);');
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+}
+
+function removeUpvote($database, $userId, $postId): void
+{
+    $statement = $database->prepare('DELETE FROM upvotes WHERE post_id = :postId AND user_id = :userId');
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+}
+
+function getUpvotesByUser($database, $userId): array
+{
+    $statement = $database->prepare('SELECT * FROM upvotes where user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $upvotes = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $upvotes;
+}
+function getUpvotesByPost($database, $postId): array
+{
+    $statement = $database->prepare('SELECT * FROM upvotes where post_id = :postId');
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $upvotes = $statement->fetchAll(PDO::FETCH_ASSOC);
+    // die(var_dump($upvotes));
+    return $upvotes;
+}
+function countUpvotes($database, $postId): int
+{
+    $upvotes = getUpvotesByPost($database, $postId);
+    $upvoteCount = count($upvotes);
+    // die(var_dump($upvoteCount));
+    return $upvoteCount;
+}
+
+function hasUserUpvotedPost($database, $postId, $userId): bool
+{
+    $upvoteCheck = $database->prepare('SELECT * FROM upvotes WHERE post_id = :postId AND user_id = :userId');
+    $upvoteCheck->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $upvoteCheck->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $upvoteCheck->execute();
+
+    $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
+    return !!$upvoteExists;
 }

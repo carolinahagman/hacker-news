@@ -4,16 +4,23 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
 $posts = getAllPosts($database);
+if (isset($_SESSION['user'])) {
+    $upvotesUser = getUpvotesByUser($database, $_SESSION['user']['id']);
+}
 $sorting = 'new';
 if (isset($_GET['sorting'])) {
     $sorting = $_GET['sorting'];
 }
 switch ($sorting) {
     case 'upvote':
-        usort($posts, "sortByUpvotes");
+        usort($posts, function ($a, $b) use ($database) {
+            return count(getUpvotesByPost($database, $b['id'])) - count(getUpvotesByPost($database, $a['id']));
+        });
         break;
     case 'comment':
-        usort($posts, "sortByComments");
+        usort($posts, function ($a, $b) use ($database) {
+            return count(getCommentsByPostId($database, $b['id'])) - count(getCommentsByPostId($database, $a['id']));
+        });
         break;
 
     default:
@@ -43,12 +50,22 @@ switch ($sorting) {
     </ul>
     <section class="flex flex-col items-center">
         <?php foreach ($posts as $post) :
+            $upvotesPosts = getUpvotesByPost($database, $post['id']);
         ?>
             <div class="w-11/12 max-w-md bg-gray-50 rounded-md m-1 shadow-sm flex justify-between py-3 pl-1 pr-3">
                 <div class="flex items-center">
                     <div>
-                        <div class="mr-4 arrow-up"></div>
-                        <small>20</small>
+                        <?php if (isset($_SESSION['user'])) : ?>
+                            <button data-user-id="<?= $_SESSION['user']['id'] ?>" data-post-id="<?= $post['id'] ?>" type="submit" id="upvote-btn<?= $post['id'] ?>" class="flex flex-col items-start justify-center upvote-btn">
+                                <div class="mr-4 arrow-up <?= in_array(array('user_id' => $_SESSION['user']['id'], 'post_id' => $post['id']), $upvotesUser) ? 'orange' : 'black' ?>"></div>
+                                <small class="w-1/2 upvote-counter"><?= countUpvotes($database, $post['id']) ?></small>
+                            </button>
+                        <?php else : ?>
+                            <button type="submit" id="upvote-btn<?= $post['id'] ?>" class="flex flex-col items-start justify-center upvote-btn">
+                                <div class="mr-4 arrow-up black"></div>
+                                <small class="w-1/2 upvote-counter"><?= countUpvotes($database, $post['id']) ?></small>
+                            </button>
+                        <?php endif; ?>
                     </div>
                     <div class="h-full">
                         <h1 class="text-md font-semibold uppercase">
@@ -58,7 +75,7 @@ switch ($sorting) {
                                 <a class="text-sm font-thin lowercase" href="<?= $post['link']; ?>">(link)</a>
                             <?php endif; ?>
                         </h1>
-                        <small class="font-thin">posted by
+                        <small class="font-thin ">posted by
                             <a href="/profile.php?alias=<?= $post['alias'] ?>"><?= $post['alias']; ?> </a> </small>
                         <p><?= $post['create_date']; ?></p>
                     </div>

@@ -3,9 +3,7 @@
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
-if (!loggedIn()) {
-    redirect('/');
-}
+
 
 $alias = $_GET['alias'];
 $userInfo = getUserProfile($database, $alias);

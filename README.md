@@ -30,25 +30,25 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [x] As a user I should be able to delete my posts.
 
-- [ ] As a user I'm able to view most upvoted posts.
+- [x] As a user I'm able to view most upvoted posts.
 
 - [x] As a user I'm able to view new posts.
 
-- [ ] As a user I should be able to upvote posts.
+- [x] As a user I should be able to upvote posts.
 
-- [ ] As a user I should be able to remove upvote from posts.
+- [x] As a user I should be able to remove upvote from posts.
 
 - [x] As a user I'm able to comment on a post.
 
-- [ ] As a user I'm able to edit my comments.
+- [x] As a user I'm able to edit my comments.
 
 - [x] As a user I'm able to delete my comments.
 
-- [ ] As a user I'm able to reply to comments.
-
 - [x] As a user I'm able to delete my account along with all posts, upvotes and comments.
 
-- [ ] As a user I'm able to resetting my password with email.
+- [ ] As a user I'm able to reply to comments. (Backlog)
+
+- [ ] As a user I'm able to resetting my password with email. (Backlog)
 </details>
 
 <details><summary> Requirements </summary>
