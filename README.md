@@ -98,10 +98,13 @@ Open the index.php file in your preferred browser
 ## Tested by
 
 - [Reka Madarasz](https://github.com/mreka91)
+- [Amanda Fager](https://github.com/amandafager)
 
 ## Code Review by
 
-Rikard Segerkvist
+- [Rikard Segerkvist](https://github.com/rikardseg)
+
+
 
 <strong>/public/index.php: 14-28</strong> Good idea to use the functionality of switch here to get a good overview
 of your different sortingmethods.
