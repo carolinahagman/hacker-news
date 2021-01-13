@@ -8,8 +8,10 @@ require __DIR__ . '/views/header.php';
 $alias = $_GET['alias'];
 $userInfo = getUserProfile($database, $alias);
 
+if(isset($_SESSION['user'])){
 if ($userInfo['id'] === $_SESSION['user']['id']) {
     redirect('/myprofile.php');
+}
 }
 
 ?>
