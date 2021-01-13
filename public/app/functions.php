@@ -221,15 +221,6 @@ function getCommentsByPostId($database, $postId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
-function getCommentsByUserId($database, $userId): array
-{
-    $statement = $database->prepare('SELECT comments.*, users.alias
-    FROM comments INNER JOIN users on users.id = comments.user_id WHERE users.id = :userId');
-    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $statement->execute();
-    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
-    return $comments;
-}
 
 function countComments($database, $postId)
 {
@@ -259,15 +250,6 @@ function removeUpvote($database, $userId, $postId): void
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
-}
-function getUpvotesByUser($database, $userId): array
-{
-    $statement = $database->prepare('SELECT * FROM upvotes where user_id = :userId');
-    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $statement->execute();
-
-    $upvotes = $statement->fetchAll(PDO::FETCH_ASSOC);
-    return $upvotes;
 }
 function getUpvotesByPost($database, $postId): array
 {
