@@ -47,10 +47,7 @@ if (dropBtns.length > 0) {
 if (editCommentBtns.length !== 0) {
   editCommentBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
-      console.log("EDIT");
       const data = btn.dataset.commentId;
-      console.log(data);
-      console.log(event.target);
       document
         .querySelector(`#edit-comment-text${data}`)
         .classList.toggle("hidden");
@@ -69,8 +66,6 @@ if (upvoteBtns.length > 0) {
   upvoteBtns.forEach((upvoteBtn) => {
     const userId = upvoteBtn.dataset.userId;
     const postId = upvoteBtn.dataset.postId;
-    // console.log(upvoteBtns);
-
     if (userId && postId) {
       upvoteBtn.addEventListener("click", (e) => {
         e.preventDefault();
