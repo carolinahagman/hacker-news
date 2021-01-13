@@ -51,7 +51,7 @@ function getUserProfile($database, $alias): array
 
     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
     return $userInfo;
-};
+}
 //delete user
 function deleteUser($database, $userId)
 {
