@@ -82,7 +82,7 @@ switch ($sorting) {
                 </div>
                 <div class="flex flex-col items-end justify-between">
                     <?php if (strlen($post['image']) !== 0) : ?>
-                        <img class="w-16 h-16 object-cover" src="/app/posts/uploads/<?= $post['image'] ?>" alt="" />
+                        <img class="w-16 h-16 object-cover" src="/app/posts/uploads/<?= $post['image'] ?>" alt="<?= $post['title'] ?>" />
                     <?php else : ?>
                         <div></div>
                     <?php endif; ?>

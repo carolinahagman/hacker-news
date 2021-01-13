@@ -25,7 +25,7 @@ $postDate = formatDate($post['create_date']);
                 </h1>
             </a>
             <?php if (strlen($post['image']) !== 0) : ?>
-                <img class="w-full py-2" src="/app/posts/uploads/<?= $post['image'] ?>" alt="">
+                <img class="w-full py-2" src="/app/posts/uploads/<?= $post['image'] ?>" alt="<?= $post['title'] ?>">
             <?php endif; ?>
             <p class=""><?= $post['content']; ?></p>
         </article>
