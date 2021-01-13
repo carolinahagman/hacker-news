@@ -99,10 +99,11 @@ if (upvoteBtns.length > 0) {
     }
   });
 }
-
-editProfileBtn.addEventListener("click", () => {
-  innerCard.classList.add("flip");
-});
-cancelBtn.addEventListener("click", () => {
-  innerCard.classList.remove("flip");
-});
+if (editProfileBtn) {
+  editProfileBtn.addEventListener("click", () => {
+    innerCard.classList.add("flip");
+  });
+  cancelBtn.addEventListener("click", () => {
+    innerCard.classList.remove("flip");
+  });
+}

@@ -67,7 +67,7 @@ switch ($sorting) {
                             </button>
                         <?php endif; ?>
                     </div>
-                    <div class="h-full">
+                    <div class="h-full flex flex-col">
                         <h1 class="text-md font-semibold uppercase">
                             <?= $post['title']; ?>
                             <?php
@@ -86,7 +86,7 @@ switch ($sorting) {
                     <?php else : ?>
                         <div></div>
                     <?php endif; ?>
-                    <a class="w-full flex" href="/post.php?id=<?= $post['id'] ?>" <p class="ml-2"><?= countComments($database, $post['id']) ?></p>
+                    <a class="" href="/post.php?id=<?= $post['id'] ?>"><?= countComments($database, $post['id']) ?>
                     </a>
                 </div>
             </div>
