@@ -101,6 +101,44 @@ Open the index.php file in your preferred browser
 
 ## Code Review by
 
+Rikard Segerkvist
+
+<strong>/public/index.php: 14-28</strong> Good idea to use the functionality of switch here to get a good overview
+of your different sortingmethods.
+
+<strong>app/users/logout.php: 6</strong>Could be an idea to also use session_unset()
+before session_destroy() here, but it's probably not necessary.
+
+<strong>app/users/login.php: 21</strong> Error message might be a little bit misleading, considering
+that we're not checking if password is verified until further down on line 28.
+
+<strong>public/create.php: 11-12</strong> Might want to move up "Create account" text along with
+ending </ h1> tag so that they are on the same line as opening < h1>.
+
+<strong>public/app/users/editProfile.php</strong> Instead of checking every single input field
+you could update all fields in one sql query even if all fields are not changed
+to achieve less code, but that's just a thought.
+
+<strong>public/app/users/functions.php: 201</strong> Here the variables in the function
+are declared but not used inside of the function, I assume it had
+a different purpose originally but now it only returns 1.
+
+<strong>public/app/users/functions.php: 279</strong> and 286 Still two commented diedumps here
+used for testing that could be removed now, not a big deal.
+
+<strong>public/assets/custom-styles, tailwind.css</strong> Really nice and clean design on your application!
+
+<strong>public/app/posts/delete.php</strong> Seems like this file isn't
+currently being used to delete anything.
+
+<strong>public/app/posts/upvote.php: 19-27</strong> A commented if
+statement here that could be removed, but no big deal.
+
+Incredible work on your application, Carolina!
+Very clean code, could barely find anything to comment on.
+
+dash; Rikard Segerkvist
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details
