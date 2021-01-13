@@ -45,7 +45,7 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
 }
 function getUserProfile($database, $alias): array
 {
-    $statement = $database->prepare('SELECT * FROM users WHERE alias = :alias');
+    $statement = $database->prepare('SELECT id, email, biography, avatar, alias, create_date FROM users WHERE alias = :alias');
     $statement->bindParam(':alias', $alias, PDO::PARAM_STR);
     $statement->execute();
 
@@ -195,14 +195,6 @@ function sortByDate($post1, $post2): int
 {
     return $post2['create_date'] - $post1['create_date'];
 }
-// function sortByUpvotes($database, $post1, $post2): int
-// {
-// }
-function sortByComments($post1, $post2): int
-{
-    return 1;
-    // return $post2['upvotes']
-}
 //FUNCTIONS FOR COMMENTS
 function addComment($database, $comment, $postId, $userId): void
 {
@@ -212,7 +204,6 @@ function addComment($database, $comment, $postId, $userId): void
     $statement->bindParam(':content', $comment, PDO::PARAM_STR);
     $statement->execute();
 }
-
 function getCommentsByPostId($database, $postId): array
 {
     $statement = $database->prepare('SELECT comments.*, users.alias  FROM comments INNER JOIN users on comments.user_id = users.id WHERE comments.post_id = :postId');
@@ -230,14 +221,12 @@ function getCommentsByUserId($database, $userId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
-
 function countComments($database, $postId)
 {
     $comments = getCommentsByPostId($database, $postId);
     $commentsCount = count($comments);
     return $commentsCount === 1 ? '1 comment' : "$commentsCount comments";
 }
-
 function deleteComment($database, $commentId, $userId): void
 {
     $statement = $database->prepare('DELETE FROM comments where id = :commentId AND user_id = :userId');
