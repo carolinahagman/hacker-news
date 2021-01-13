@@ -21,7 +21,7 @@ if (!loggedIn()) {
                 </div>
                 <p class="mt-2 mb-6  justify-self-start"><?= $_SESSION['user']['biography']; ?></p>
                 <ul class="pb-10 flex flex-col items-center">
-                    <li><a href="">POSTS</a></li>
+                    <li><a href="/myPosts.php?userid=<?= $_SESSION['user']['id'] ?>">POSTS</a></li>
                     <li><a href="">COMMENTS</a></li>
                     <li><a href="">UPVOTES</a></li>
                 </ul>
