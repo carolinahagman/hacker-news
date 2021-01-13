@@ -11,23 +11,21 @@ if (!loggedIn()) {
     <div class="flip-card">
         <div class="flip-card-inner">
             <section class="pt-10 w-full max-w-md flex flex-col items-center shadow-md rounded-lg flip-card-front">
-                <div class="flex mt-3">
-                    <img class="w-20 h-12 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
-                    <ul class=" ml-4">
-                        <li class="text-lg"><?= $_SESSION['user']['alias']; ?></li>
-                        <li class="text-sm">created at <?= $_SESSION['user']['create_date']; ?></li>
-                        <li><button class="font-semibold edit-profile-btn">edit profile</button></li>
-                    </ul>
-                </div>
-                <p class="mt-2 mb-6  justify-self-start"><?= $_SESSION['user']['biography']; ?></p>
-                <ul class="pb-10 flex flex-col items-center">
-                    <li><a href="/myPosts.php?userid=<?= $_SESSION['user']['id'] ?>">POSTS</a></li>
-                    <li><a href="/myComments.php?userid=<?= $_SESSION['user']['id'] ?>">COMMENTS</a></li>
-                    <li><a href="/myUpvotes.php?userid=<?= $_SESSION['user']['id'] ?>">UPVOTES</a></li>
+
+                <img class="w-32 h-32 object-cover rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
+                <ul class="mt-6">
+                    <li class="text-lg"><?= $_SESSION['user']['alias']; ?></li>
+                    <li class="text-sm">created at <?= $_SESSION['user']['create_date']; ?></li>
+                    <li><button class="font-semibold edit-profile-btn">edit profile</button></li>
                 </ul>
+
+                <p class="mt-2 mb-6 text-lg justify-self-start"><?= $_SESSION['user']['biography']; ?></p>
+                <div class="pb-10 flex flex-col items-center">
+                    <a class="text-4xl font-bold" href="/myPosts.php?userid=<?= $_SESSION['user']['id'] ?>">POSTS</a>
+                </div>
             </section>
             <section class="w-full max-w-md flex flex-col items-center shadow-md rounded-lg py-2 flip-card-back">
-                <img class="w-12 h-12 mt-2 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
+                <img class="w-12 h-12 object-cover mt-2 rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
                 <form class="w-full flex flex-col items-center" action="/app/users/editProfile.php" method="post" enctype="multipart/form-data">
                     <div class="flex flex-col items-center">
                         <label for="change-avatar" class="">change avatar</label>

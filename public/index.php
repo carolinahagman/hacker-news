@@ -86,7 +86,7 @@ switch ($sorting) {
                     <?php else : ?>
                         <div></div>
                     <?php endif; ?>
-                    <a class="" href="/post.php?id=<?= $post['id'] ?>"><?= countComments($database, $post['id']) ?>
+                    <a class="whitespace-nowrap" href="/post.php?id=<?= $post['id'] ?>"><?= countComments($database, $post['id']) ?>
                     </a>
                 </div>
             </div>

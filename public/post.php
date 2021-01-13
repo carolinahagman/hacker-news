@@ -72,7 +72,7 @@ $postDate = formatDate($post['create_date']);
                 <div><a href="/profile.php?alias=<?= $comment['alias'] ?>" class="ml-1"><?= $comment['alias'] ?></a>
                     <div class="flex">
                         <div class="comment-container">
-                            <textarea name="edit-comment-text" class="hidden " id="edit-comment-text<?= $comment['id'] ?>"><?= $comment['content'] ?></textarea>
+                            <textarea name="edit-comment-text" class="hidden" id="edit-comment-text<?= $comment['id'] ?>"><?= $comment['content'] ?></textarea>
                             <p class="border rounded-md py-1 pl-2 pr-4 mb-2 " id="comment-content<?= $comment['id'] ?>"><?= $comment['content'] ?></p>
                         </div>
                         <?php if (isset($_SESSION['user'])) :

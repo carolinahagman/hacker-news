@@ -8,6 +8,10 @@ require __DIR__ . '/views/header.php';
 $alias = $_GET['alias'];
 $userInfo = getUserProfile($database, $alias);
 
+if ($userInfo['id'] === $_SESSION['user']['id']) {
+    redirect('/myprofile.php');
+}
+
 ?>
 <main class="w-full flex flex-col items-center">
     <section class=" w-full max-w-md flex flex-col items-center shadow-md rounded-lg">
@@ -20,9 +24,9 @@ $userInfo = getUserProfile($database, $alias);
             </ul>
         </div>
         <p class="mt-2 mb-6  justify-self-start"><?= $userInfo['biography']; ?></p>
-        <ul class="pb-10 flex flex-col items-center">
-            <li><a href="/myPosts.php?userid=<?= $userInfo['id'] ?>">POSTS</a></li>
-        </ul>
+        <div class="pb-10 flex flex-col items-center">
+            <a class="text-4xl font-bold" href="/myPosts.php?userid=<?= $userInfo['id'] ?>">POSTS</a>
+        </div>
     </section>
 </main>
 <?php require __DIR__ . '/views/footer.php'; ?>
