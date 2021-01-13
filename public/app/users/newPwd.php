@@ -7,8 +7,8 @@ require __DIR__ . '/../autoload.php';
 if (isset($_POST['email'])) {
     $userEmail = filter_var($_POST['email'], FILTER_SANITIZE_URL);
     if (!emailExists($database, $userEmail)) {
-        redirect('/login.php');
         $_SESSION['error'] = "Sorry, email doesn't exist";
+        redirect('/login.php');
     }
     $userInfo = getUserInfo($database, $userEmail);
     $to = $userEmail;
@@ -24,5 +24,6 @@ if (isset($_POST['email'])) {
     $headers .= "From: hagmancarolina@gmail.com" . "\r\n" .
         "CC: hagmancarolina@gmail.com";
     mail($to, $subject, $txt, $headers);
+    $_SESSION['message'] = "Password sent to your email";
     redirect('/login.php');
 }
