@@ -15,13 +15,3 @@ if (isset($_REQUEST['userId'], $_REQUEST['postId'])) {
         addUpvote($database, $userId, $postId);
     }
 }
-
-// $postId = $_GET['id'];
-// if (isset($_POST['submit'])) {
-//     $userId = $_SESSION['user']['id'];
-//     addUpvote($database, $userId, $postId);
-// }
-
-
-
-// redirect('/');
