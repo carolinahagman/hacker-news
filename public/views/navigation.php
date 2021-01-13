@@ -6,7 +6,7 @@
         </li><!-- /nav-item -->
 
         <li class="">
-            <?php if (isset($_SESSION['user'])) : ?>
+            <?php if (isset($_SESSION['user'], $_SESSION['user']['alias'])) : ?>
                 <a class="" href="/myProfile.php"><?= $_SESSION['user']['alias'] ?></a>
             <?php endif; ?>
         </li><!-- /nav-item -->
