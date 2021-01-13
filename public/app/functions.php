@@ -221,6 +221,15 @@ function getCommentsByPostId($database, $postId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
+function getCommentsByUserId($database, $userId): array
+{
+    $statement = $database->prepare('SELECT comments.*, users.alias
+    FROM comments INNER JOIN users on users.id = comments.user_id WHERE users.id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $comments;
+}
 
 function countComments($database, $postId)
 {
@@ -287,6 +296,7 @@ function hasUserUpvotedPost($database, $postId, $userId): bool
     $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
     return !!$upvoteExists;
 }
+//TODO:FIX THIS!!!
 function formatDate($date): string
 {
     $dateCreate = (date_create($date));

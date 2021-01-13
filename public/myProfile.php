@@ -22,8 +22,8 @@ if (!loggedIn()) {
                 <p class="mt-2 mb-6  justify-self-start"><?= $_SESSION['user']['biography']; ?></p>
                 <ul class="pb-10 flex flex-col items-center">
                     <li><a href="/myPosts.php?userid=<?= $_SESSION['user']['id'] ?>">POSTS</a></li>
-                    <li><a href="">COMMENTS</a></li>
-                    <li><a href="">UPVOTES</a></li>
+                    <li><a href="/myComments.php?userid=<?= $_SESSION['user']['id'] ?>">COMMENTS</a></li>
+                    <li><a href="/myUpvotes.php?userid=<?= $_SESSION['user']['id'] ?>">UPVOTES</a></li>
                 </ul>
             </section>
             <section class="w-full max-w-md flex flex-col items-center shadow-md rounded-lg py-2 flip-card-back">
