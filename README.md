@@ -95,6 +95,10 @@ Open the index.php file in your preferred browser
 
 - Carolina Hagman
 
+## Tested by
+
+- [Reka Madarasz](https://github.com/mreka91)
+
 ## Code Review by
 
 ## License
