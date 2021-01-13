@@ -293,6 +293,9 @@ function hasUserUpvotedPost($database, $postId, $userId): bool
 //TODO:FIX THIS!!!
 function formatDate($date): string
 {
-    $dateCreate = (date_create($date));
-    return (date_format($dateCreate, 'jS F Y'));
+    $dateParts = str_split($date);
+    $dateStr = $dateParts[0] . $dateParts[1] . "-" . $dateParts[2] . $dateParts[3] . "-" . $dateParts[4] . $dateParts[5];
+    $date = strtotime($dateStr);
+    $formattedDate = date('jS F Y', $date);
+    return $formattedDate;
 }

@@ -21,7 +21,7 @@ if (isset($_SESSION['user'])) {
             <img class="w-20 h-20 object-cover rounded-full" src="/app/users/uploads/<?= $userInfo['avatar'] ?>" alt="avatar">
             <ul class=" ml-4">
                 <li class="text-lg"><?= $userInfo['alias']; ?></li>
-                <li class="text-sm">created at <?= $userInfo['create_date']; ?></li>
+                <li class="text-sm">created at <?= formatDate($userInfo['create_date']); ?></li>
 
             </ul>
         </div>

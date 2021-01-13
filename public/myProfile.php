@@ -15,7 +15,7 @@ if (!loggedIn()) {
                 <img class="w-32 h-32 object-cover rounded-full" src="/app/users/uploads/<?= $_SESSION['user']['avatar'] ?>" alt="avatar">
                 <ul class="mt-6">
                     <li class="text-lg"><?= $_SESSION['user']['alias']; ?></li>
-                    <li class="text-sm">created at <?= $_SESSION['user']['create_date']; ?></li>
+                    <li class="text-sm">created at <?= formatDate($_SESSION['user']['create_date']); ?></li>
                     <li><button class="font-semibold edit-profile-btn">edit profile</button></li>
                 </ul>
 
