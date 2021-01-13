@@ -27,6 +27,16 @@ function emailExists($database, $email): bool
     $emailExists = $emailCheck->fetch(PDO::FETCH_ASSOC);
     return !!$emailExists;
 }
+
+function getUserInfo($database, $userEmail): array
+{
+    $statement = $database->prepare('SELECT * FROM users WHERE email = :userEmail');
+    $statement->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
+    $statement->execute();
+
+    $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
+    return $userInfo;
+}
 //create user
 function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated): void
 {
@@ -290,7 +300,6 @@ function hasUserUpvotedPost($database, $postId, $userId): bool
     $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
     return !!$upvoteExists;
 }
-//TODO:FIX THIS!!!
 function formatDate($date): string
 {
     $dateParts = str_split($date);

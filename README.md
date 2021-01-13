@@ -48,7 +48,7 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [ ] As a user I'm able to reply to comments. (Backlog)
 
-- [ ] As a user I'm able to resetting my password with email. (Backlog)
+- [ ] As a user I'm able to resetting my password with email. (Working on it)
 </details>
 
 <details><summary> Requirements </summary>
@@ -103,8 +103,6 @@ Open the index.php file in your preferred browser
 ## Code Review by
 
 - [Rikard Segerkvist](https://github.com/rikardseg)
-
-
 
 <strong>/public/index.php: 14-28</strong> Good idea to use the functionality of switch here to get a good overview
 of your different sortingmethods.

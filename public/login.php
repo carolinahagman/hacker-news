@@ -21,7 +21,7 @@ require __DIR__ . '/views/header.php'; ?>
         </div><!-- /form-group -->
 
         <button type="submit" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900">Login</button>
-        <a class="text-gray-900 mt-2" href="#">forgot password?</a>
+        <a class="text-gray-900 mt-2" href="/forgotPwd.php">forgot password?</a>
         <a class="text-gray-900" href="/create.php">create account</a>
     </form>
 </article>
