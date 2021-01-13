@@ -199,14 +199,6 @@ function sortByDate($post1, $post2): int
 {
     return $post2['create_date'] - $post1['create_date'];
 }
-// function sortByUpvotes($database, $post1, $post2): int
-// {
-// }
-function sortByComments($post1, $post2): int
-{
-    return 1;
-    // return $post2['upvotes']
-}
 //FUNCTIONS FOR COMMENTS
 function addComment($database, $comment, $postId, $userId): void
 {
@@ -280,14 +272,12 @@ function getUpvotesByPost($database, $postId): array
     $statement->execute();
 
     $upvotes = $statement->fetchAll(PDO::FETCH_ASSOC);
-    // die(var_dump($upvotes));
     return $upvotes;
 }
 function countUpvotes($database, $postId): int
 {
     $upvotes = getUpvotesByPost($database, $postId);
     $upvoteCount = count($upvotes);
-    // die(var_dump($upvoteCount));
     return $upvoteCount;
 }
 function hasUserUpvotedPost($database, $postId, $userId): bool

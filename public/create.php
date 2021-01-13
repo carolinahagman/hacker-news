@@ -8,8 +8,7 @@
         echo $_SESSION['message'];
         unset($_SESSION['message']);
     } ?>
-    <h1 class="mb-5 uppercase text-xl text-gray-900
-">Create account</h1>
+    <h1 class="mb-5 uppercase text-xl text-gray-900">Create account</h1>
 
     <form class="flex flex-col items-center" action="/app/users/create.php" method="post">
         <div class="">
