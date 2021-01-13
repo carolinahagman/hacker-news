@@ -21,7 +21,7 @@ $userInfo = getUserProfile($database, $alias);
         </div>
         <p class="mt-2 mb-6  justify-self-start"><?= $userInfo['biography']; ?></p>
         <ul class="pb-10 flex flex-col items-center">
-            <li><a href="">POSTS</a></li>
+            <li><a href="/myPosts.php?userid=<?= $userInfo['id'] ?>">POSTS</a></li>
         </ul>
     </section>
 </main>
