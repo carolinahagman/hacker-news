@@ -1,5 +1,7 @@
-<?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/views/header.php';
+<?php
+
+require __DIR__ . '/app/autoload.php';
+require __DIR__ . '/views/header.php';
 
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
@@ -22,9 +24,8 @@ $postDate = formatDate($post['create_date']);
                     <?php endif; ?>
                 </h1>
             </a>
-            <?php
-
-            if (strlen($post['image']) !== 0) : ?><img class="w-full py-2" src="/app/posts/uploads/<?= $post['image'] ?>" alt="">
+            <?php if (strlen($post['image']) !== 0) : ?>
+                <img class="w-full py-2" src="/app/posts/uploads/<?= $post['image'] ?>" alt="">
             <?php endif; ?>
             <p class=""><?= $post['content']; ?></p>
         </article>

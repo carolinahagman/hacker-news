@@ -18,7 +18,6 @@ function aliasExists($database, $alias): bool
     $aliasExists = $aliasCheck->fetch(PDO::FETCH_ASSOC);
     return !!$aliasExists;
 }
-
 function emailExists($database, $email): bool
 {
     $emailCheck = $database->prepare('SELECT * FROM users WHERE email = :email');
@@ -28,7 +27,6 @@ function emailExists($database, $email): bool
     $emailExists = $emailCheck->fetch(PDO::FETCH_ASSOC);
     return !!$emailExists;
 }
-
 //create user
 function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, $dateCreated): void
 {
@@ -45,7 +43,6 @@ function createUser($database, $email, $hashedPwd, $biography, $avatar, $alias, 
     $statement->bindParam(':create_date', $dateCreated, PDO::PARAM_STR);
     $statement->execute();
 }
-//TODO: get user data
 function getUserProfile($database, $alias): array
 {
     $statement = $database->prepare('SELECT * FROM users WHERE alias = :alias');
@@ -55,7 +52,6 @@ function getUserProfile($database, $alias): array
     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
     return $userInfo;
 };
-
 //delete user
 function deleteUser($database, $userId)
 {
@@ -231,18 +227,14 @@ function deleteComment($database, $commentId, $userId): void
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
-
+//FUNCTIONS FOR UPVOTES
 function addUpvote($database, $userId, $postId): void
 {
-    //  $userId = (int) $userIdStr;
-    //    $postId = (int) $postIdStr;
-
     $statement = $database->prepare('insert into upvotes (post_id, user_id) values (:postId, :userId);');
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
-
 function removeUpvote($database, $userId, $postId): void
 {
     $statement = $database->prepare('DELETE FROM upvotes WHERE post_id = :postId AND user_id = :userId');
@@ -250,7 +242,6 @@ function removeUpvote($database, $userId, $postId): void
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
-
 function getUpvotesByUser($database, $userId): array
 {
     $statement = $database->prepare('SELECT * FROM upvotes where user_id = :userId');
@@ -277,7 +268,6 @@ function countUpvotes($database, $postId): int
     // die(var_dump($upvoteCount));
     return $upvoteCount;
 }
-
 function hasUserUpvotedPost($database, $postId, $userId): bool
 {
     $upvoteCheck = $database->prepare('SELECT * FROM upvotes WHERE post_id = :postId AND user_id = :userId');
@@ -288,7 +278,6 @@ function hasUserUpvotedPost($database, $postId, $userId): bool
     $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
     return !!$upvoteExists;
 }
-
 function formatDate($date): string
 {
     $dateCreate = (date_create($date));
