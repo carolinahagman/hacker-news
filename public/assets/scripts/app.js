@@ -9,7 +9,6 @@ const dropDowns = document.querySelectorAll(".dropdown-content");
 const innerCard = document.querySelector(".flip-card-inner");
 const editProfileBtn = document.querySelector(".edit-profile-btn");
 const cancelBtn = document.querySelector("#cancel-btn");
-// const sendEditBtns = document.querySelectorAll(".send-edit-btn");
 const upvoteBtns = document.querySelectorAll(".upvote-btn");
 if (deletePostBtn) {
   deletePostBtn.addEventListener("click", (e) => {
