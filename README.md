@@ -48,7 +48,7 @@ The assignment was to create a site that works like [Hacker News](https://news.y
 
 - [ ] As a user I'm able to reply to comments. (Backlog)
 
-- [ ] As a user I'm able to resetting my password with email. (Almost works)
+- [ ] As a user I'm able to resetting my password with email. (Working on it)
 </details>
 
 <details><summary> Requirements </summary>
