@@ -1,5 +1,5 @@
-<img src="/public/assets/screenshot/Screenshot 2021-01-14 at 17.20.32.png" width="100%">
-<img src="/public/assets/screenshot/Screenshot 2021-01-14 at 17.21.17.png" width="100%">
+<img src="/public/assets/screenshot/Screenshot 2021-01-14 at 17.20.32.png" width="45%"> 
+<img src="/public/assets/screenshot/Screenshot 2021-01-14 at 17.21.17.png" width="45%">
 
 # Hacker News
 
