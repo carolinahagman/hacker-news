@@ -18,7 +18,7 @@ if (isset($_POST['email'])) {
     updatePwd($database, $hashedPwd, $userId);
 
     $subject = "Password";
-    $txt = "Your password is : $password.";
+    $txt = "Your password is : $password. Remember to change the password!";
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= "From: hagmancarolina@gmail.com" . "\r\n" .
