@@ -50,6 +50,7 @@ if (!loggedIn()) {
                     <button type="submit" name="submit" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900">Update</button>
                 </form>
                 <form class="flex flex-col items-center" action="/app/users/editProfile.php" id="delete-profile-form" method="post" enctype="multipart/form-data">
+                   <label for="delete-profile" class="sr-only">delete</label>
                     <input type="hidden" name="delete-profile" value="true">
                     <button type="submit" name="delete-profile-btn" id="delete-profile-btn" class="text-center text-lg w-28 bg-red-600 rounded-sm mt-2 uppercase text-gray-900 0">Delete</button>
                 </form>
