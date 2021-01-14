@@ -90,7 +90,7 @@ $postDate = formatDate($post['create_date']);
                                             </svg></button>
                                     </form>
                                     <div id="my-dropdown<?= $comment['id'] ?>" class="dropdown-content">
-                                        <button class="edit-comment-btn" data-comment-id="<?= $comment['id'] ?>">Edit</button>
+                                        <button class="edit-comment-btn ml-1" data-comment-id="<?= $comment['id'] ?>">Edit</button>
                                         <a href="/app/posts/addComment.php?id=<?= $id ?>&comment=<?= $comment['id'] ?>&action=delete">Delete</a>
                                     </div>
                                 </div>
