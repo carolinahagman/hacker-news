@@ -1,4 +1,5 @@
-<img src="https://media0.giphy.com/media/RyXVu4ZW454IM/giphy.gif?cid=ecf05e47y6p2i8k7vuwno2ijrlp1d3swo9p1guczypfbe6zy&rid=giphy.gif" width="100%">
+<img src="/public/assets/screenshot/Screenshot 2021-01-14 at 17.20.32.png" width="100%">
+<img src="/public/assets/screenshot/Screenshot 2021-01-14 at 17.21.17.png" width="100%">
 
 # Hacker News
 
