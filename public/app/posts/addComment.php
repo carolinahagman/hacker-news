@@ -17,5 +17,11 @@ if (isset($_GET['action'])) {
         deleteComment($database, $commentId, $userId);
     }
 }
+if (isset($_GET['action'])) {
+    if ($_GET['action'] === 'edit') {
+        $comment = filter_var($_POST['edit-comment-text'], FILTER_SANITIZE_STRING);
+        editComment($database, $comment, $commentId);
+    }
+}
 
 redirect("/post.php?id=${postId}");

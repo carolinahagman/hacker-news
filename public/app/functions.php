@@ -218,6 +218,13 @@ function addComment(pdo $database, string $comment, $postId, $userId): void
     $statement->bindParam(':content', $comment, PDO::PARAM_STR);
     $statement->execute();
 }
+function editComment(pdo $database, string $comment, $commentId): void
+{
+    $statement = $database->prepare('UPDATE comments SET content  = :updatedContent WHERE id = :commentId;');
+    $statement->bindParam(':commentId', $commentId);
+    $statement->bindParam(':updatedContent', $comment);
+    $statement->execute();
+}
 
 function getCommentsByPostId(pdo $database, $postId): array
 {

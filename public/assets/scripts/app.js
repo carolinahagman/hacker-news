@@ -45,8 +45,12 @@ if (dropBtns.length > 0) {
 
 if (editCommentBtns.length !== 0) {
   editCommentBtns.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
+    console.log(btn);
+    btn.addEventListener("mousedown", function (event) {
+      event.preventDefault();
+      console.log("HELLO WORLD");
       const data = btn.dataset.commentId;
+      console.log(`#edit-comment-text${data}`);
       document
         .querySelector(`#edit-comment-text${data}`)
         .classList.toggle("hidden");
