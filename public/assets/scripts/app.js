@@ -9,7 +9,10 @@ const dropDowns = document.querySelectorAll(".dropdown-content");
 const innerCard = document.querySelector(".flip-card-inner");
 const editProfileBtn = document.querySelector(".edit-profile-btn");
 const cancelBtn = document.querySelector("#cancel-btn");
+//const sendEditBtns = document.querySelectorAll(".send-edit-btn");
 const upvoteBtns = document.querySelectorAll(".upvote-btn");
+const upvoteCommentBtns = document.querySelectorAll(".upvoteComment-btn");
+
 if (deletePostBtn) {
   deletePostBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ if (deleteProfileBtn) {
     }
   });
 }
+
 if (dropBtns.length > 0) {
   dropBtns.forEach((dropBtn) => {
     const data = dropBtn.dataset.commentId;
@@ -97,6 +101,42 @@ if (upvoteBtns.length > 0) {
     }
   });
 }
+
+
+if (upvoteCommentBtns.length > 0) {
+  upvoteCommentBtns.forEach((upvoteCommentBtn) => {
+    const userId = upvoteCommentBtn.dataset.userId;
+    const commentId = upvoteCommentBtn.dataset.commentId;
+    if (userId && commentId) {
+        upvoteCommentBtn.addEventListener("click", (e) => {
+//        console.log("hello comment 1 world");
+        e.preventDefault();
+        const ajax = new XMLHttpRequest();
+        ajax.open(
+          "get",
+          `http://localhost:8000/app/posts/upvoteComment.php?userId=${userId}&commentId=${commentId}`,
+          "SERVER-SCRIPT"
+        );
+        ajax.send();
+        const count = upvoteCommentBtn.querySelector(".upvote-counter").innerHTML;
+        if (upvoteCommentBtn.querySelector(".arrow-up").classList.contains("black")) {
+//          console.log("hello comment 2 world");
+          upvoteCommentBtn.querySelector(".arrow-up").classList.toggle("black");
+          upvoteCommentBtn.querySelector(".arrow-up").classList.toggle("orange");
+          upvoteCommentBtn.querySelector(".upvote-counter").innerHTML =
+            Number(count) + 1;
+        } else {
+          upvoteCommentBtn.querySelector(".arrow-up").classList.toggle("black");
+          upvoteCommentBtn.querySelector(".arrow-up").classList.toggle("orange");
+          upvoteCommentBtn.querySelector(".upvote-counter").innerHTML =
+            Number(count) - 1;
+        }
+        return false;
+      });
+    }
+  });
+}
+
 if (editProfileBtn) {
   editProfileBtn.addEventListener("click", () => {
     innerCard.classList.add("flip");

@@ -9,8 +9,13 @@ if (isset($_SESSION['user'])) {
 $id = $_GET['id'];
 $post = getPostById($database, $id);
 $comments = getCommentsByPostId($database, $id);
-getUpvotesByPost($database, $id);
+$upvotesUser = getUpvotesByPost($database, $id);
 $postDate = formatDate($post['create_date']);
+
+//if (isset($_SESSION['user'])) {
+//    $upvotesCommentUser = getUpvotesCommentByUser($database, $_SESSION['user']['id']);
+//}
+
 ?>
 
 <main class="w-full flex flex-col items-center">
@@ -68,9 +73,24 @@ $postDate = formatDate($post['create_date']);
                 <?php endif; ?>
             </form>
 
-            <?php foreach ($comments as $comment) : ?>
+            <?php foreach ($comments as $comment) :
+                $upvotesComment = getUpvotesByComment($database, $comment['id']); ?>
                 <div><a href="/profile.php?alias=<?= $comment['alias'] ?>" class="ml-1"><?= $comment['alias'] ?></a>
                     <div class="flex">
+<!-- Button functionality for upvoting on comments  -->
+
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <button data-user-id="<?= $_SESSION['user']['id'] ?>" data-comment-id="<?= $comment['id'] ?>" type="submit" id="upvoteComment-btn<?= $comment['id'] ?>" class="flex flex-col items-start justify-center upvoteComment-btn">
+                                <div class="mr-4 arrow-up <?= in_array(array('user_id' => $_SESSION['user']['id'], 'comment_id' => $comment['id']), $upvotesComment) ? 'orange' : 'black' ?>"></div>
+                                <small class="w-1/2 upvote-counter"><?= countCommentUpvotes($database, $comment['id']) ?></small>
+                        </button>
+                    <?php else : ?>
+                        <button type="submit" id="upvoteComment-btn<?= $comment['id'] ?>" class="flex flex-col items-start justify-center upvoteComment-btn">
+                            <div class="mr-4 arrow-up black"></div>
+                            <small class="w-1/2 upvote-counter"><?= countCommentUpvotes($database, $comment['id']) ?></small>
+                        </button>
+                    <?php endif; ?>
+<!-- end  -->
                         <form action="/app/posts/addComment.php?id=<?= $id ?>&comment=<?= $comment['id'] ?>&action=edit" method="post" class="flex">
                             <div class="comment-container">
                                 <label for="edit-comment-text" class="sr-only">edit comment</label>
@@ -92,7 +112,7 @@ $postDate = formatDate($post['create_date']);
                                             <circle cx="1.5" cy="9.5" r="1.5" fill="#212121" />
                                         </svg>
                                     </button>
-
+                            
                                     <div id="my-dropdown<?= $comment['id'] ?>" class="dropdown-content">
                                         <button class="edit-comment-btn ml-1" id="edit-comment-btn<?= $comment['id'] ?>" data-comment-id="<?= $comment['id'] ?>">Edit</button>
                                         <a href="/app/posts/addComment.php?id=<?= $id ?>&comment=<?= $comment['id'] ?>&action=delete">Delete</a>
@@ -100,7 +120,13 @@ $postDate = formatDate($post['create_date']);
                                 </div>
                             <?php endif; ?>
                         <?php endif; ?>
+                                <!-- Functionality for replying on comments  -->
+                                <?php if (isset($_SESSION['user'])) : ?>
+                            <a href="app/posts/replyComment.php?comment_id=<?= $comment['id']; ?>">Reply</a>
+                        <?php endif; ?>
+                                    <!-- end  -->
                     </div>
+
                 </div>
             <?php endforeach; ?>
 

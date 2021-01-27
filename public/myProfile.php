@@ -21,7 +21,7 @@ if (!loggedIn()) {
 
                 <p class="mt-2 mb-6 text-lg justify-self-start"><?= $_SESSION['user']['biography']; ?></p>
                 <div class="pb-10 flex flex-col items-center">
-                    <a class="text-4xl font-bold" href="/myPosts.php?userid=<?= $_SESSION['user']['id'] ?>">POSTS</a>
+                    <a class="text-4xl font-bold" href="/myPosts.php?userid=<?= $_SESSION['user']['id'] ?>">POSTS, COMMENTS AND UPVOTES</a>
                 </div>
             </section>
             <section class="w-full max-w-md flex flex-col items-center shadow-md rounded-lg py-2 flip-card-back">
@@ -55,7 +55,6 @@ if (!loggedIn()) {
                     <button type="submit" name="delete-profile-btn" id="delete-profile-btn" class="text-center text-lg w-28 bg-red-600 rounded-sm mt-2 uppercase text-gray-900 0">Delete</button>
                 </form>
                 <button id="cancel-btn" class="text-center text-lg w-28 bg-gray-200 rounded-sm mt-2 uppercase text-gray-900 ">Cancel</button>
-
 
             </section>
         </div>

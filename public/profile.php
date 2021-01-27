@@ -27,7 +27,7 @@ if (isset($_SESSION['user'])) {
         </div>
         <p class="mt-2 mb-6  justify-self-start"><?= $userInfo['biography']; ?></p>
         <div class="pb-10 flex flex-col items-center">
-            <a class="text-4xl font-bold" href="/myPosts.php?userid=<?= $userInfo['id'] ?>">POSTS</a>
+            <a class="text-4xl font-bold" href="/myPosts.php?userid=<?= $userInfo['id'] ?>">POSTS, COMMENTS AND UPVOTES</a>
         </div>
     </section>
 </main>

@@ -28,15 +28,16 @@ function emailExists(pdo $database, string $email): bool
     return !!$emailExists;
 }
 
-function getUserInfo(pdo $database, string $userEmail): array
-{
-    $statement = $database->prepare('SELECT * FROM users WHERE email = :userEmail');
-    $statement->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
-    $statement->execute();
+// function getUserInfo(pdo $database, string $userEmail): array
+// {
+//     $statement = $database->prepare('SELECT * FROM users WHERE email = :userEmail');
+//     $statement->bindParam(':userEmail', $userEmail, PDO::PARAM_STR);
+//     $statement->execute();
 
-    $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
-    return $userInfo;
-}
+//     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
+//     return $userInfo;
+// }
+
 //create user
 function createUser(pdo $database, string $email, string $hashedPwd, string $biography, string $avatar, string $alias, string $dateCreated): void
 {
@@ -60,6 +61,7 @@ function getUserProfile(pdo $database, string $alias): array
     $statement->execute();
 
     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
+    return $userInfo;
     if (is_array($userInfo)) {
         return $userInfo;
     }
@@ -74,6 +76,10 @@ function deleteUser(pdo $database, $userId): void
     $statement->execute();
 
     $statement = $database->prepare('DELETE FROM upvotes WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $statement = $database->prepare('DELETE FROM upvotes_comment WHERE user_id = :userId');
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 
@@ -209,6 +215,14 @@ function sortByDate($post1, $post2): int
 {
     return $post2['create_date'] - $post1['create_date'];
 }
+// function sortByUpvotes($database, $post1, $post2): int
+// {
+// }
+function sortByComments($post1, $post2): int
+{
+    return 1;
+    // return $post2['upvotes']
+}
 //FUNCTIONS FOR COMMENTS
 function addComment(pdo $database, string $comment, $postId, $userId): void
 {
@@ -218,6 +232,26 @@ function addComment(pdo $database, string $comment, $postId, $userId): void
     $statement->bindParam(':content', $comment, PDO::PARAM_STR);
     $statement->execute();
 }
+
+function addCommentReply(pdo $database, $comment, $postId, $userId, $parentCommentId) : void
+{
+    $statement = $database->prepare('INSERT INTO comments (post_id, user_id, content, parent_comment_id) VALUES (:postId, :userId, :content, :parent_comment_id);');
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->bindParam(':content', $comment, PDO::PARAM_STR);
+    $statement->bindParam(':parent_comment_id', $parentCommentId, PDO::PARAM_INT);
+    $statement->execute();
+}
+
+function getComment(pdo $database, $commentId): array
+{
+    $statement = $database->prepare('SELECT * FROM comments WHERE id = :id');
+    $statement->bindParam(':id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+    $comment = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $comment;
+}
+
 function editComment(pdo $database, string $comment, $commentId): void
 {
     $statement = $database->prepare('UPDATE comments SET content  = :updatedContent WHERE id = :commentId;');
@@ -234,6 +268,7 @@ function getCommentsByPostId(pdo $database, $postId): array
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
+
 function getCommentsByUserId(pdo $database, $userId): array
 {
     $statement = $database->prepare('SELECT comments.*, users.alias
@@ -258,7 +293,7 @@ function deleteComment(pdo $database, $commentId, $userId): void
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
-//FUNCTIONS FOR UPVOTES
+//FUNCTIONS FOR UPVOTES ON POSTS
 function addUpvote(pdo $database, $userId, $postId): void
 {
     $statement = $database->prepare('insert into upvotes (post_id, user_id) values (:postId, :userId);');
@@ -307,11 +342,68 @@ function hasUserUpvotedPost(pdo $database, $postId, $userId): bool
     $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
     return !!$upvoteExists;
 }
-function formatDate(string $date): string
+
+//FUNCTIONS FOR UPVOTES ON COMMENTS
+function addUpvoteComment(pdo $database, $userId, $commentId): void
 {
-    $dateParts = str_split($date);
-    $dateStr = $dateParts[0] . $dateParts[1] . "-" . $dateParts[2] . $dateParts[3] . "-" . $dateParts[4] . $dateParts[5];
-    $date = strtotime($dateStr);
-    $formattedDate = date('jS F Y', $date);
-    return $formattedDate;
+    $statement = $database->prepare('insert into upvotes_comment (comment_id, user_id) values (:commentId, :userId);');
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+}
+function removeUpvoteComment(pdo $database, $userId, $commentId): void
+{
+    $statement = $database->prepare('DELETE FROM upvotes_comment WHERE comment_id = :commentId AND user_id = :userId');
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+}
+function getUpvotesCommentByUser(pdo $database, $userId): array
+{
+    $statement = $database->prepare('SELECT * FROM upvotes_comment where user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $upvotes = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $upvotes;
+}
+function getUpvotesByComment(pdo $database, $commentId): array
+{
+    $statement = $database->prepare('SELECT * FROM upvotes_comment where comment_id = :commentId');
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $upvotes = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $upvotes;
+}
+function countCommentUpvotes(pdo $database, $commentId): int
+{
+    $upvotes = getUpvotesByComment($database, $commentId);
+    $upvoteCount = count($upvotes);
+    return $upvoteCount;
+}
+function hasUserUpvotedComment(pdo $database, $commentId, $userId): bool
+{
+    $upvoteCheck = $database->prepare('SELECT * FROM upvotes_comment WHERE comment_id = :commentId AND user_id = :userId');
+    $upvoteCheck->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $upvoteCheck->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $upvoteCheck->execute();
+
+    $upvoteExists = $upvoteCheck->fetch(PDO::FETCH_ASSOC);
+    return !!$upvoteExists;
+}
+
+// function formatDate(string $date): string
+// {
+//     $dateParts = str_split($date);
+//     $dateStr = $dateParts[0] . $dateParts[1] . "-" . $dateParts[2] . $dateParts[3] . "-" . $dateParts[4] . $dateParts[5];
+//     $date = strtotime($dateStr);
+//     $formattedDate = date('jS F Y', $date);
+//     return $formattedDate;
+// }
+//TODO:FIX THIS!!!
+function formatDate($date): string
+{
+    $dateCreate = (date_create($date));
+    return (date_format($dateCreate, 'jS F Y'));
 }

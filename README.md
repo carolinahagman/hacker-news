@@ -139,8 +139,20 @@ statement here that could be removed, but no big deal.
 Incredible work on your application, Carolina!
 Very clean code, could barely find anything to comment on.
 
-dash; Rikard Segerkvist
+&dash; Rikard Segerkvist
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details
+
+# HackerNews +
+
+Rikard Segerkvist
+
+Extra features added by: [Rikard Segerkvist](https://github.com/rikardseg)
+
+Link to pull request: ''
+
+- As a user I'm able to upvote comments.
+
+- As a user I'm able to view posts and comments by a user.

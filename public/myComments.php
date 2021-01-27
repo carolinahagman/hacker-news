@@ -37,7 +37,7 @@ $posts = getPostsByUserId($database, $userId); ?>
                 <?php else : ?>
                     <div></div>
                 <?php endif; ?>
-                <a class="w-full flex" href="/post.php?id=<?= $post['id'] ?>" <p class="ml-2"><?= countComments($database, $post['id']) ?></p>
+                <a class="w-full flex" href="/post.php?id=<?= $post['id'] ?>"> <p class="ml-2"><?= countComments($database, $post['id']) ?></p>
                 </a>
             </div>
         </div>
