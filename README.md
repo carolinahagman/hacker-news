@@ -151,7 +151,7 @@ Rikard Segerkvist
 
 Extra features added by: [Rikard Segerkvist](https://github.com/rikardseg)
 
-Link to pull request: ''
+Link to pull request: 'https://github.com/carolinahagman/hacker-news/pull/2/commits/a6fe9c153f2bfb1721a2f742dce2686c9f08958f'
 
 - As a user I'm able to upvote comments.
 
