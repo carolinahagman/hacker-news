@@ -293,6 +293,35 @@ function deleteComment(pdo $database, $commentId, $userId): void
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
+
+function replyExistOnComment($database, $commentId): bool
+{
+    $statement = $database->prepare('SELECT * FROM comments WHERE parent_comment_id = :parent_comment_id');
+    $statement->bindParam(':parent_comment_id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+    $replyExists = $statement->fetch(PDO::FETCH_ASSOC);
+    return !!$replyExists;
+}
+
+function getReplyOnComment($database, $parentCommentId): string
+{
+    $statement = $database->prepare('SELECT * FROM comments WHERE parent_comment_id = :parent_comment_id');
+    $statement->bindParam(':parent_comment_id', $parentCommentId, PDO::PARAM_INT);
+    $statement->execute();
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($comments as $comment) :
+        $replyText = $comment['content'];
+        $replyUserid = $comment['user_id'];
+    endforeach;
+
+    $statement = $database->prepare('SELECT alias FROM users WHERE id = :id');
+    $statement->bindParam(':id', $replyUserid, PDO::PARAM_STR);
+    $statement->execute();
+    $alias = $statement->fetchColumn();
+
+    return $replyText . " (Reply by: " . $alias . ")";
+}
 //FUNCTIONS FOR UPVOTES ON POSTS
 function addUpvote(pdo $database, $userId, $postId): void
 {
